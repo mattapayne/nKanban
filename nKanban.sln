@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nKanban", "nKanban\nKanban.csproj", "{45588EA3-F730-469D-B5D6-1F7EA8056CDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nKanban.AcceptanceTests", "nKanban.AcceptanceTests\nKanban.AcceptanceTests.csproj", "{7E39644C-8842-4C29-9B07-CBC6ECD433E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{70BD3EB5-78D0-4876-A010-1B2695D24A6C}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		nKanban.vsmdi = nKanban.vsmdi
+		README = README
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specs.nKanban", "Specs.nKanban\Specs.nKanban.csproj", "{5196CC7B-70DA-4031-9267-88C62D13539C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nKanban.Domain", "nKanban.Domain\nKanban.Domain.csproj", "{AF92E502-F9C8-4A08-B14F-F950847C5654}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nKanban.Services", "nKanban.Services\nKanban.Services.csproj", "{C06F4917-0B61-4A16-9999-CDB2383062F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nKanban.Persistence", "nKanban.Persistence\nKanban.Persistence.csproj", "{61CB5A31-098B-4C5E-941F-58E0BD093F4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D2E251D1-9177-4983-8F9E-760FF7A79856}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = nKanban.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45588EA3-F730-469D-B5D6-1F7EA8056CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45588EA3-F730-469D-B5D6-1F7EA8056CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45588EA3-F730-469D-B5D6-1F7EA8056CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45588EA3-F730-469D-B5D6-1F7EA8056CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E39644C-8842-4C29-9B07-CBC6ECD433E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E39644C-8842-4C29-9B07-CBC6ECD433E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E39644C-8842-4C29-9B07-CBC6ECD433E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E39644C-8842-4C29-9B07-CBC6ECD433E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5196CC7B-70DA-4031-9267-88C62D13539C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5196CC7B-70DA-4031-9267-88C62D13539C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5196CC7B-70DA-4031-9267-88C62D13539C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5196CC7B-70DA-4031-9267-88C62D13539C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF92E502-F9C8-4A08-B14F-F950847C5654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF92E502-F9C8-4A08-B14F-F950847C5654}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF92E502-F9C8-4A08-B14F-F950847C5654}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF92E502-F9C8-4A08-B14F-F950847C5654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06F4917-0B61-4A16-9999-CDB2383062F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06F4917-0B61-4A16-9999-CDB2383062F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06F4917-0B61-4A16-9999-CDB2383062F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06F4917-0B61-4A16-9999-CDB2383062F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61CB5A31-098B-4C5E-941F-58E0BD093F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61CB5A31-098B-4C5E-941F-58E0BD093F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61CB5A31-098B-4C5E-941F-58E0BD093F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61CB5A31-098B-4C5E-941F-58E0BD093F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

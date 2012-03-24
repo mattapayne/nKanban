@@ -1,0 +1,8 @@
+Local.testsettings
+nKanban.suo
+nKanban.vsmdi
+TraceAndtestImpact.testsettings
+packages/
+bin/
+obj/
+*.user
