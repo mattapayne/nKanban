@@ -1,0 +1,9 @@
+﻿.validation-summary-valid, .field-validation-valid
+{
+    display:none !important;
+}
+
+.validation-summary-errors, .field-error
+{
+    color:Red;
+}

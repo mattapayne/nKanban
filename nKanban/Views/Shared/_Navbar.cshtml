@@ -1,7 +1,7 @@
 ﻿<div class="navbar">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="@Url.Action("/")">nKanban</a>
+            @Html.ActionLink("nKanban", "Index", "Home", null, new { @class = "brand"} )
             <div class="nav-collapse">
                 <ul class="nav">
                     <li>

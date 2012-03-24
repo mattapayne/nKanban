@@ -85,6 +85,107 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Register with missing data")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Registration")]
+        public virtual void RegisterWithMissingData()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register with missing data", ((string[])(null)));
+#line 11
+this.ScenarioSetup(scenarioInfo);
+#line 12
+    testRunner.Given("I am not logged in");
+#line 13
+    testRunner.When("I navigate to Register");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "FirstName",
+                        "LastName",
+                        "Email",
+                        "Password",
+                        "PasswordConfirmation",
+                        "OrganizationName",
+                        "Address1",
+                        "Address2",
+                        "City",
+                        "ProvinceId",
+                        "CountryId",
+                        "PostalCode"});
+            table1.AddRow(new string[] {
+                        "Matt",
+                        "",
+                        "paynmatt@gmail.com",
+                        "232423",
+                        "232423",
+                        "MattCo",
+                        "123 Test St",
+                        "Suite 2",
+                        "Waterloo",
+                        "",
+                        "",
+                        "N2L 2A2"});
+#line 14
+    testRunner.And("I fill in the form with", ((string)(null)), table1);
+#line 17
+    testRunner.And("I click the Register button");
+#line 18
+    testRunner.Then("I should see errors in an element with the id: validation-errors and the class: v" +
+                    "alidation-summary-errors on the page");
+#line 19
+    testRunner.And("I should be on the Register page");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Register with correct data")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Registration")]
+        public virtual void RegisterWithCorrectData()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register with correct data", ((string[])(null)));
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line 22
+    testRunner.Given("I am not logged in");
+#line 23
+    testRunner.When("I navigate to Register");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "FirstName",
+                        "LastName",
+                        "Email",
+                        "Password",
+                        "PasswordConfirmation",
+                        "OrganizationName",
+                        "Address1",
+                        "Address2",
+                        "City",
+                        "ProvinceId",
+                        "CountryId",
+                        "PostalCode"});
+            table2.AddRow(new string[] {
+                        "Matt",
+                        "Payne",
+                        "paynmatt@gmail.com",
+                        "232423",
+                        "232423",
+                        "MattCo",
+                        "123 Test St",
+                        "Suite 2",
+                        "Waterloo",
+                        "",
+                        "",
+                        "N2L 2A2"});
+#line 24
+    testRunner.And("I fill in the form with", ((string)(null)), table2);
+#line 27
+    testRunner.And("I click the Register button");
+#line 28
+    testRunner.Then("I should be on the Dashboard page");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

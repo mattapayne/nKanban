@@ -86,6 +86,67 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Login with missing data")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
+        public virtual void LoginWithMissingData()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login with missing data", ((string[])(null)));
+#line 11
+this.ScenarioSetup(scenarioInfo);
+#line 12
+    testRunner.Given("I am not logged in");
+#line 13
+    testRunner.When("I navigate to Login");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "UserName",
+                        "Password"});
+            table1.AddRow(new string[] {
+                        "paynmatt@gmail.com",
+                        ""});
+#line 14
+    testRunner.And("I fill in the form with", ((string)(null)), table1);
+#line 17
+    testRunner.And("I click the Login button");
+#line 18
+    testRunner.Then("I should see errors in an element with the id: validation-errors and the class: v" +
+                    "alidation-summary-errors on the page");
+#line 19
+    testRunner.And("I should be on the Login page");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Login with correct data")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
+        public virtual void LoginWithCorrectData()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login with correct data", ((string[])(null)));
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line 22
+    testRunner.Given("I am not logged in");
+#line 23
+    testRunner.When("I navigate to Login");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "UserName",
+                        "Password"});
+            table2.AddRow(new string[] {
+                        "paynmatt@gmail.com",
+                        "232423"});
+#line 24
+    testRunner.And("I fill in the form with", ((string)(null)), table2);
+#line 27
+    testRunner.And("I click the Login button");
+#line 28
+    testRunner.Then("I should be on the Dashboard page");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

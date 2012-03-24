@@ -23,5 +23,13 @@ namespace nKanban.AcceptanceTests.Steps
             link.Should().NotBeNull();
             link.Text.Should().ContainEquivalentOf(linkName);
         }
+
+        [Then(@"I should see errors in an element with the id: (.*) and the class: (.*) on the page")]
+        public void ThenThereShouldBeAnElementOnThePage(string elementId, string className)
+        {
+            var element = WebBrowser.Current.Elements.Where(e => e.Id == elementId).FirstOrDefault();
+            element.Should().NotBeNull();
+            element.ClassName.Should().ContainEquivalentOf(className);
+        }
     }
 }

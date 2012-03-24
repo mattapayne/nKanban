@@ -5,4 +5,36 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>New</h2>
+<h2>
+    Login to nKanban</h2>
+@using (Html.BeginForm("Create", "Session", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary("There were some errors ...", new { id = "validation-errors" })
+    
+    <fieldset>
+        <div class="control-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.UserName, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.UserName, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.Password, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.Password, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.RememberMe, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.RememberMe, new { @class = "input-xlarge" })
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Login" />
+        </div>
+    </fieldset>
+}
+

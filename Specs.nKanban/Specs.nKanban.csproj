@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllerSpecs\Dashboard\DashboardControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\ForgotPassword\ForgotPasswordControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\Home\HomeControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\Register\RegisterControllerSpecs.cs" />

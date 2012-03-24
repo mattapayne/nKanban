@@ -13,5 +13,16 @@ namespace nKanban.Controllers
         {
             return View(new LoginViewModel());
         }
+
+        [HttpPost]
+        public ActionResult Create(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToRoute("Dashboard");
+            }
+
+            return View("New", model);
+        }
     }
 }

@@ -1,8 +1,104 @@
 ﻿@model nKanban.Models.RegisterViewModel
-
 @{
     ViewBag.Title = "nKanban :: Register";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
+<h2>
+    Register for nKanban</h2>
+@using (Html.BeginForm("Create", "Register", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary("There were some errors ...", new { id = "validation-errors" })
 
-<h2>New</h2>
+    <fieldset>
+        <legend>Please fill in the required information below</legend>
+        <div class="control-group">
+            @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.FirstName, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.FirstName, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.LastName, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.LastName, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.Email, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.Email, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.Password, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.Password, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.PasswordConfirmation, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.PasswordConfirmation, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.PasswordConfirmation, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Organizational Information</legend>
+        <div class="control-group">
+            @Html.LabelFor(m => m.OrganizationName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.OrganizationName, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.OrganizationName, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Address1, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.Address1, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.Address1, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Address2, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.Address2, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.Address2, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.City, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.City, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.City, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.ProvinceId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(m => m.ProvinceId, new List<SelectListItem>(), new { @class = "input-medium" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.CountryId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(m => m.CountryId, new List<SelectListItem>(), new { @class = "input-medium" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.PostalCode, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.PostalCode, new { @class = "input-small" })
+                @Html.ValidationMessageFor(m => m.PostalCode, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Register" />
+        </div>
+    </fieldset>
+}
