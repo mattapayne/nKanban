@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using nKanban.Infrastructure.IoC;
+using nKanban.Infrastructure;
+using System.Threading;
+using nKanban.Shared;
 
 namespace nKanban
 {
@@ -35,6 +39,21 @@ namespace nKanban
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+
+            DependencyResolver.SetResolver(IoCFactory.CreateDependencyResolver());
+
+            AppBootstrapper.Bootstrap();
+        }
+
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+            //TODO - Add code to ignore requests for assets like images, js, css, etc
+            if (HttpContext.Current != null && HttpContext.Current.User != null)
+            {
+                var customPrincipal = new nKanbanPrincipal(new nKanbanIdentity(HttpContext.Current.User.Identity));
+                HttpContext.Current.User = customPrincipal;
+                Thread.CurrentPrincipal = customPrincipal;
+            }
         }
     }
 }

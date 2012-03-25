@@ -36,6 +36,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMongo">
+      <HintPath>..\packages\FluentMongo.1.3.1.1\lib\FluentMongo.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.3.1\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.3.1\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -60,6 +75,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AbstractBaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -69,6 +85,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\AppBootstrapper.cs" />
+    <Compile Include="Infrastructure\IoC\IoCFactory.cs" />
+    <Compile Include="Infrastructure\IoC\SmDependencyResolver.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -143,7 +163,32 @@
   <ItemGroup>
     <Content Include="Views\Register\New.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\nKanban.Domain\nKanban.Domain.csproj">
+      <Project>{AF92E502-F9C8-4A08-B14F-F950847C5654}</Project>
+      <Name>nKanban.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nKanban.Persistence.MongoDb\nKanban.Persistence.MongoDb.csproj">
+      <Project>{A3E75799-BA73-410A-8690-F81F3B75777F}</Project>
+      <Name>nKanban.Persistence.MongoDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nKanban.Persistence\nKanban.Persistence.csproj">
+      <Project>{61CB5A31-098B-4C5E-941F-58E0BD093F4B}</Project>
+      <Name>nKanban.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nKanban.Services.Impl\nKanban.Services.Impl.csproj">
+      <Project>{CC0B697F-59C4-4441-B6CC-07554177F64D}</Project>
+      <Name>nKanban.Services.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nKanban.Services\nKanban.Services.csproj">
+      <Project>{C06F4917-0B61-4A16-9999-CDB2383062F8}</Project>
+      <Name>nKanban.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nKanban.Shared\nKanban.Shared.csproj">
+      <Project>{2DB6FF62-4137-4E4A-A4AE-EEFA8852C735}</Project>
+      <Name>nKanban.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Session\New.cshtml" />
   </ItemGroup>
