@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace nKanban.Controllers
 {
     [Authorize]
-    public class DashboardController : Controller
+    public class DashboardController : AbstractBaseController
     {
         public ActionResult Show()
         {

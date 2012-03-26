@@ -13,12 +13,10 @@ namespace nKanban.Services.Impl
 {
     public class UserService : AbstractBaseService, IUserService
     {
-        private readonly JavaScriptSerializer _serializer;
-
         public UserService(IRepository repository)
             : base(repository)
         {
-            _serializer = new JavaScriptSerializer();
+
         }
 
         public bool IsEmailAddressUnique(string email)
@@ -30,9 +28,18 @@ namespace nKanban.Services.Impl
         public IEnumerable<ServiceError> CreateUser(User user, string password)
         {
             var errors = new List<ServiceError>();
-            //do some checks and validations
 
-            if (!IsEmailAddressUnique(user.Email))
+            if (user == null)
+            {
+                errors.Add(new ServiceError(String.Empty, "User cannot be null."));
+            }
+
+            if (String.IsNullOrEmpty(password))
+            {
+                errors.Add(new ServiceError("Password", "Password cannot be empty."));
+            }
+
+            if (user != null && !IsEmailAddressUnique(user.Email))
             {
                 errors.Add(new ServiceError("Email", "Sorry, that username is taken."));
             }
@@ -47,15 +54,6 @@ namespace nKanban.Services.Impl
             }
 
             return errors;
-        }
-
-        public void LoginUser(User user, bool persistent)
-        {
-            var ticket = new FormsAuthenticationTicket(1, user.Id.ToString(), DateTime.Now, DateTime.Now.AddMinutes(30), persistent, _serializer.Serialize(user.ToJson()));
-
-            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-
-            HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
         }
 
         public IEnumerable<ServiceError> VerifyLogin(string username, string password)
@@ -83,6 +81,11 @@ namespace nKanban.Services.Impl
 
         public User GetUser(string username)
         {
+            if (String.IsNullOrEmpty(username))
+            {
+                return null;
+            }
+
             return Repository.Query<User>(u => u.Email == username).FirstOrDefault();
         }
 

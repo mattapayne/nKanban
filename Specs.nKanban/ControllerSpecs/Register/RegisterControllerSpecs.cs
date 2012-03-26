@@ -20,12 +20,14 @@ namespace Specs.nKanban.ControllerSpecs.Register
     {
         protected static RegisterController controller;
         protected static IUserService userService;
+        protected static ILoginService loginService;
 
         Establish context = () => 
         {
             AppBootstrapper.Bootstrap();
             userService = A.Fake<IUserService>();
-            controller = new RegisterController(userService); 
+            loginService = A.Fake<ILoginService>();
+            controller = new RegisterController(userService, loginService); 
         };
     }
 
@@ -35,7 +37,7 @@ namespace Specs.nKanban.ControllerSpecs.Register
         static Exception exception;
         static RegisterController controller;
 
-        Because of = () => { exception = Catch.Exception(() => { controller = new RegisterController(null); }); };
+        Because of = () => { exception = Catch.Exception(() => { controller = new RegisterController(null, null); }); };
 
         It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
     }
@@ -97,7 +99,7 @@ namespace Specs.nKanban.ControllerSpecs.Register
 
         It should_create_the_user = () => { A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored)).MustHaveHappened(Repeated.Exactly.Once); };
 
-        It should_log_the_user_in = () => { A.CallTo(() => userService.LoginUser(A<User>.Ignored, false)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_log_the_user_in = () => { A.CallTo(() => loginService.LoginUser(A<User>.Ignored, false)).MustHaveHappened(Repeated.Exactly.Once); };
 
         It should_redirect_to_the_dashboard = () => { result.ShouldBeARedirectToRoute(); };
 
@@ -136,7 +138,7 @@ namespace Specs.nKanban.ControllerSpecs.Register
 
         It should_attempt_to_create_the_user = () => { A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<string>.Ignored)).MustHaveHappened(Repeated.Exactly.Once); };
 
-        It should_not_log_the_user_in = () => { A.CallTo(() => userService.LoginUser(A<User>.Ignored, A<bool>.Ignored)).MustNotHaveHappened(); };
+        It should_not_log_the_user_in = () => { A.CallTo(() => loginService.LoginUser(A<User>.Ignored, A<bool>.Ignored)).MustNotHaveHappened(); };
 
         It should_rerender_the_register_view = () => { result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New"); };
 

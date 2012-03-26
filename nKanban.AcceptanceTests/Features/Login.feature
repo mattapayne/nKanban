@@ -26,3 +26,9 @@ Scenario: Login with correct data
         | paynmatt@gmail.com    | 232423    |
     And I click the Login button
     Then I should be on the Dashboard page
+
+Scenario: Attempting to access login when already logged in
+    Given I am not logged in
+    When I login
+    And I navigate to Login
+    Then I should be on the Dashboard page

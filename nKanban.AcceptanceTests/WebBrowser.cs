@@ -13,13 +13,28 @@ namespace nKanban.AcceptanceTests
     {
         private const string CONTEXT_KEY = "__browser__";
         private const string WEB_APP_ROOT_URL_KEY = "WebAppRootUrl";
-        private static IE _browser;
+        private static string _rootUrl;
+
+        static WebBrowser()
+        {
+            _rootUrl = ConfigurationManager.AppSettings[WEB_APP_ROOT_URL_KEY];
+
+            if (String.IsNullOrEmpty(_rootUrl))
+            {
+                throw new Exception("Please set the web app root url in app.config.");
+            }
+        }
 
         public static IE Current
         {
             get
             {
-                return _browser;
+                if (!ScenarioContext.Current.ContainsKey(CONTEXT_KEY))
+                {
+                    ScenarioContext.Current.Add(CONTEXT_KEY, new IE());
+                }
+
+                return ScenarioContext.Current[CONTEXT_KEY] as IE;
             }
         }
 
@@ -34,46 +49,18 @@ namespace nKanban.AcceptanceTests
             browser.GoTo(absolute);
         }
 
-        [BeforeScenario]
-        public static void BeforeAllScenarios()
-        {
-            if (Current != null)
-            {
-                Current.ClearCookies();
-                Current.ClearCache();
-            }
-        }
-
-        [BeforeTestRun]
-        public static void InitializeBrowser()
-        {
-            if (Current == null)
-            {
-                Settings.Instance.MakeNewIeInstanceVisible = false;
-                _browser = new IE();
-            }
-        }
-
-        [AfterTestRun]
+        [AfterScenario]
         public static void KillBrowser()
         {
-            if (Current != null)
+            if (ScenarioContext.Current.ContainsKey(CONTEXT_KEY))
             {
                 Current.Close();
-                Current.Dispose();
             }
         }
 
         private static string ToAbsoluteUrl(string relativeUrl)
         {
-            string rootUrl = ConfigurationManager.AppSettings[WEB_APP_ROOT_URL_KEY];
-
-            if (String.IsNullOrEmpty(rootUrl))
-            {
-                throw new Exception("Please set the web app root url in app.config.");
-            }
-
-            return new Uri(new Uri(rootUrl), relativeUrl).ToString();
+            return new Uri(new Uri(_rootUrl), relativeUrl).ToString();
         }
     }
 }

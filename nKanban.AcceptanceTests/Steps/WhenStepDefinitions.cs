@@ -9,6 +9,15 @@ namespace nKanban.AcceptanceTests.Steps
     [Binding]
     public class WhenStepDefinitions
     {
+        [When(@"I login")]
+        public void WhenILogin()
+        {
+            WebBrowser.Current.GoToRelative("Login");
+            WebBrowser.Current.TextField("UserName").TypeFast("paynmatt@gmail.com");
+            WebBrowser.Current.TextField("Password").TypeFast("232423");
+            WebBrowser.Current.Button("Login").Click();
+        }
+
         [When(@"I navigate to (.*)")]
         public void WhenINavigateTo(string url)
         {

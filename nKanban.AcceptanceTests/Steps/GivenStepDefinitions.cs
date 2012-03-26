@@ -12,7 +12,7 @@ namespace nKanban.AcceptanceTests.Steps
         [Given(@"I am not logged in")]
         public void GivenIAmNotLoggedIn()
         {
-            //no-op for now.
+            WebBrowser.Current.ClearCookies();
         }
     }
 }

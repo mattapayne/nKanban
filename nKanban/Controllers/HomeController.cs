@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace nKanban.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AbstractBaseController
     {
         public ActionResult Index()
         {

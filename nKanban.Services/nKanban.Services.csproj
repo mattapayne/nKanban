@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILoginService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,6 +52,10 @@
     <ProjectReference Include="..\nKanban.Domain\nKanban.Domain.csproj">
       <Project>{AF92E502-F9C8-4A08-B14F-F950847C5654}</Project>
       <Name>nKanban.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nKanban.Shared\nKanban.Shared.csproj">
+      <Project>{2DB6FF62-4137-4E4A-A4AE-EEFA8852C735}</Project>
+      <Name>nKanban.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

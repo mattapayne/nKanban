@@ -7,20 +7,38 @@ Scenario: Browse to the home page
 	When I navigate to /
 	Then I should be on the Home page
 
-Scenario: Login from the home page
+Scenario: Login is available from the home page when anonymous
     Given I am not logged in
     When I navigate to /
     Then I should see a Login link
 
-Scenario: Register from the home page
+Scenario: Register is available from the home page when anonymous
     Given I am not logged in
     When I navigate to /
     Then I should see a Register link
 
-Scenario: Forgot password from the home page
+Scenario: Forgot password is available from the home page when anonymous
     Given I am not logged in
     When I navigate to /
     Then I should see a Forgot Password link
+
+Scenario: Logout is available from the home page when logged in
+    Given I am not logged in
+    When I login
+    And I navigate to /
+    Then I should see a Logout link
+
+Scenario: Reset Password is available from the home page when logged in
+    Given I am not logged in
+    When I login
+    And I navigate to /
+    Then I should see a Reset Password link
+
+Scenario: Dashboard is available from the home page when logged in
+    Given I am not logged in
+    When I login
+    And I navigate to /
+    Then I should see a Dashboard link
 
 Scenario: About link from the home page
     When I navigate to /

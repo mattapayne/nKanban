@@ -7,20 +7,30 @@ using nKanban.Models;
 using nKanban.Services;
 using nKanban.Domain;
 using AutoMapper;
+using nKanban.Infrastructure;
+using nKanban.Filters;
 
 namespace nKanban.Controllers
 {
+    [AnonymousOnlyFilter]
     public class RegisterController : AbstractBaseController
     {
         private readonly IUserService _userService;
+        private readonly ILoginService _loginService;
 
-        public RegisterController(IUserService userService)
+        public RegisterController(IUserService userService, ILoginService loginService)
         {
             if (userService == null)
             {
                 throw new ArgumentNullException("userService");
             }
 
+            if (loginService == null)
+            {
+                throw new ArgumentNullException("loginService");
+            }
+
+            _loginService = loginService;
             _userService = userService;
         }
 
@@ -40,7 +50,7 @@ namespace nKanban.Controllers
 
                 if (!errors.Any())
                 {
-                    _userService.LoginUser(user, false);
+                    _loginService.LoginUser(user, false);
                     SetRedirectMessage(MessageType.Success, "Successfully created your account.");
                     return RedirectToRoute("Dashboard");
                 }

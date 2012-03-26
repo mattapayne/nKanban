@@ -10,7 +10,6 @@ namespace nKanban.Services
     {
         bool IsEmailAddressUnique(string email);
         IEnumerable<ServiceError> CreateUser(User user, string password);
-        void LoginUser(User user, bool persistent);
         IEnumerable<ServiceError> VerifyLogin(string username, string password);
         User GetUser(string username);
     }

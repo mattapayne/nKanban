@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nKanban.Models;
+using nKanban.Filters;
 
 namespace nKanban.Controllers
 {
-    public class ForgotPasswordController : Controller
+    [AnonymousOnlyFilter]
+    public class ForgotPasswordController : AbstractBaseController
     {
         public ActionResult New()
         {

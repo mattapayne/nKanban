@@ -86,11 +86,11 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Login from the home page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Login is available from the home page when anonymous")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Accesing the home page")]
-        public virtual void LoginFromTheHomePage()
+        public virtual void LoginIsAvailableFromTheHomePageWhenAnonymous()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login from the home page", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login is available from the home page when anonymous", ((string[])(null)));
 #line 10
 this.ScenarioSetup(scenarioInfo);
 #line 11
@@ -104,11 +104,11 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Register from the home page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Register is available from the home page when anonymous")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Accesing the home page")]
-        public virtual void RegisterFromTheHomePage()
+        public virtual void RegisterIsAvailableFromTheHomePageWhenAnonymous()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register from the home page", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register is available from the home page when anonymous", ((string[])(null)));
 #line 15
 this.ScenarioSetup(scenarioInfo);
 #line 16
@@ -122,11 +122,11 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Forgot password from the home page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Forgot password is available from the home page when anonymous")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Accesing the home page")]
-        public virtual void ForgotPasswordFromTheHomePage()
+        public virtual void ForgotPasswordIsAvailableFromTheHomePageWhenAnonymous()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Forgot password from the home page", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Forgot password is available from the home page when anonymous", ((string[])(null)));
 #line 20
 this.ScenarioSetup(scenarioInfo);
 #line 21
@@ -140,16 +140,76 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logout is available from the home page when logged in")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Accesing the home page")]
+        public virtual void LogoutIsAvailableFromTheHomePageWhenLoggedIn()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logout is available from the home page when logged in", ((string[])(null)));
+#line 25
+this.ScenarioSetup(scenarioInfo);
+#line 26
+    testRunner.Given("I am not logged in");
+#line 27
+    testRunner.When("I login");
+#line 28
+    testRunner.And("I navigate to /");
+#line 29
+    testRunner.Then("I should see a Logout link");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Reset Password is available from the home page when logged in")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Accesing the home page")]
+        public virtual void ResetPasswordIsAvailableFromTheHomePageWhenLoggedIn()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Reset Password is available from the home page when logged in", ((string[])(null)));
+#line 31
+this.ScenarioSetup(scenarioInfo);
+#line 32
+    testRunner.Given("I am not logged in");
+#line 33
+    testRunner.When("I login");
+#line 34
+    testRunner.And("I navigate to /");
+#line 35
+    testRunner.Then("I should see a Reset Password link");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Dashboard is available from the home page when logged in")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Accesing the home page")]
+        public virtual void DashboardIsAvailableFromTheHomePageWhenLoggedIn()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Dashboard is available from the home page when logged in", ((string[])(null)));
+#line 37
+this.ScenarioSetup(scenarioInfo);
+#line 38
+    testRunner.Given("I am not logged in");
+#line 39
+    testRunner.When("I login");
+#line 40
+    testRunner.And("I navigate to /");
+#line 41
+    testRunner.Then("I should see a Dashboard link");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("About link from the home page")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Accesing the home page")]
         public virtual void AboutLinkFromTheHomePage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("About link from the home page", ((string[])(null)));
-#line 25
+#line 43
 this.ScenarioSetup(scenarioInfo);
-#line 26
+#line 44
     testRunner.When("I navigate to /");
-#line 27
+#line 45
     testRunner.Then("I should see an About link");
 #line hidden
             this.ScenarioCleanup();
@@ -161,11 +221,11 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void HomeLinkFromTheHomePage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Home link from the home page", ((string[])(null)));
-#line 29
+#line 47
 this.ScenarioSetup(scenarioInfo);
-#line 30
+#line 48
     testRunner.When("I navigate to /");
-#line 31
+#line 49
     testRunner.Then("I should see an nKanban link");
 #line hidden
             this.ScenarioCleanup();
@@ -177,15 +237,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ClickingTheRegisterLinkGoesToTheRegisterPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Clicking the Register link goes to the Register page", ((string[])(null)));
-#line 33
+#line 51
 this.ScenarioSetup(scenarioInfo);
-#line 34
+#line 52
     testRunner.Given("I am not logged in");
-#line 35
+#line 53
     testRunner.When("I navigate to /");
-#line 36
+#line 54
     testRunner.And("I click the Register link");
-#line 37
+#line 55
     testRunner.Then("I should be on the Register page");
 #line hidden
             this.ScenarioCleanup();
@@ -197,13 +257,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ClickingTheAboutLinkGoesToTheAboutPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Clicking the About link goes to the About page", ((string[])(null)));
-#line 39
+#line 57
 this.ScenarioSetup(scenarioInfo);
-#line 40
+#line 58
     testRunner.When("I navigate to /");
-#line 41
+#line 59
     testRunner.And("I click the About link");
-#line 42
+#line 60
     testRunner.Then("I should be on the About page");
 #line hidden
             this.ScenarioCleanup();
@@ -215,15 +275,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ClickingTheLoginLinkGoesToTheLoginPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Clicking the Login link goes to the Login page", ((string[])(null)));
-#line 44
+#line 62
 this.ScenarioSetup(scenarioInfo);
-#line 45
+#line 63
     testRunner.Given("I am not logged in");
-#line 46
+#line 64
     testRunner.When("I navigate to /");
-#line 47
+#line 65
     testRunner.And("I click the Login link");
-#line 48
+#line 66
     testRunner.Then("I should be on the Login page");
 #line hidden
             this.ScenarioCleanup();
@@ -235,15 +295,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ClickingTheForgotPasswordLinkGoesToTheForgotPasswordPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Clicking the Forgot Password link goes to the Forgot Password page", ((string[])(null)));
-#line 50
+#line 68
 this.ScenarioSetup(scenarioInfo);
-#line 51
+#line 69
     testRunner.Given("I am not logged in");
-#line 52
+#line 70
     testRunner.When("I navigate to /");
-#line 53
+#line 71
     testRunner.And("I click the Forgot Password link");
-#line 54
+#line 72
     testRunner.Then("I should be on the Forgot Password page");
 #line hidden
             this.ScenarioCleanup();

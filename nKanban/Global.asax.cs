@@ -23,6 +23,7 @@ namespace nKanban
             routes.MapRoute("Login", "Login", new { controller = "Session", action = "New" });
             routes.MapRoute("Logout", "Logout", new { controller = "Session", action = "Delete" });
             routes.MapRoute("ForgotPassword", "ForgotPassword", new { controller = "ForgotPassword", action = "New" });
+            routes.MapRoute("ResetPassword", "ResetPassword", new { controller = "ResetPassword", action = "New" });
             routes.MapRoute("Register", "Register", new { controller = "Register", action = "New" });
             routes.MapRoute("Dashboard", "Dashboard", new { controller = "Dashboard", action = "Show" });
 

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IHttpContext.cs" />
     <Compile Include="nKanbanIdentity.cs" />
     <Compile Include="nKanbanPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

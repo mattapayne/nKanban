@@ -10,7 +10,8 @@ namespace nKanban.Shared
 {
     public class nKanbanIdentity : IIdentity
     {
-        private Guid? _id;
+        private Guid _id;
+        private readonly bool _authenticated;
         private JavaScriptSerializer _serializer;
 
         private class IdentityData
@@ -41,7 +42,16 @@ namespace nKanban.Shared
                     this.Name = ident.Name;
                     this.Roles = ident.Roles;
                     this.Email = ident.Email;
+                    this._authenticated = true;
                 }
+                else
+                {
+                    this._authenticated = false;
+                }
+            }
+            else
+            {
+                this._authenticated = false;
             }
         }
 
@@ -52,7 +62,7 @@ namespace nKanban.Shared
 
         public bool IsAuthenticated
         {
-            get { return _id.HasValue; }
+            get { return _authenticated; }
         }
 
         public string Name { get; private set; }
@@ -61,7 +71,7 @@ namespace nKanban.Shared
 
         private List<string> Roles { get; set; }
 
-        public Guid? Id
+        public Guid Id
         {
             get { return _id; }
         }

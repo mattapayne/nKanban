@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nKanban.Services;
+using nKanban.Shared;
 
 namespace nKanban.Controllers
 {
@@ -35,6 +36,27 @@ namespace nKanban.Controllers
             }
 
             ((List<string>)TempData[messageType.ToString()]).Add(message);
+        }
+
+        protected nKanbanPrincipal CurrentUser
+        {
+            get
+            {
+                if (Request.IsAuthenticated)
+                {
+                    return this.HttpContext.User as nKanbanPrincipal;
+                }
+
+                return null;
+            }
+        }
+
+        protected bool IsLoggedIn
+        {
+            get
+            {
+                return CurrentUser != null;
+            }
         }
     }
 }

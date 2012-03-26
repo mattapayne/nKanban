@@ -147,6 +147,26 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Attempting to access login when already logged in")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
+        public virtual void AttemptingToAccessLoginWhenAlreadyLoggedIn()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Attempting to access login when already logged in", ((string[])(null)));
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 31
+    testRunner.Given("I am not logged in");
+#line 32
+    testRunner.When("I login");
+#line 33
+    testRunner.And("I navigate to Login");
+#line 34
+    testRunner.Then("I should be on the Dashboard page");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

@@ -6,6 +6,7 @@ using System;
 using MongoDB.Driver;
 using nKanban.Persistence;
 using nKanban.Persistence.MongoDb;
+using nKanban.Shared;
 
 namespace nKanban.Infrastructure.IoC
 {
@@ -35,11 +36,13 @@ namespace nKanban.Infrastructure.IoC
                 c.For<MongoDatabase>().HttpContextScoped().Use(openDbFunc);
 
                 c.Scan(scanner => {
+                    scanner.TheCallingAssembly();
                     //grab all ColorMatchR assemblies from the base directory
                     scanner.AssembliesFromApplicationBaseDirectory(assembly => { return assembly.FullName.StartsWith("nKanban"); });
                     scanner.WithDefaultConventions();
                 });
 
+                c.For<IHttpContext>().Use<LocalHttpContextWrapper>();
                 c.For<IRepository>().Use<MongoDbRepository>();
             });
         }

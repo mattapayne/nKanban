@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractBaseService.cs" />
+    <Compile Include="LoginService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,6 +61,10 @@
     <ProjectReference Include="..\nKanban.Services\nKanban.Services.csproj">
       <Project>{C06F4917-0B61-4A16-9999-CDB2383062F8}</Project>
       <Name>nKanban.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\nKanban.Shared\nKanban.Shared.csproj">
+      <Project>{2DB6FF62-4137-4E4A-A4AE-EEFA8852C735}</Project>
+      <Name>nKanban.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

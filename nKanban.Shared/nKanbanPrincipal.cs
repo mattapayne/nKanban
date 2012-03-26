@@ -25,14 +25,33 @@ namespace nKanban.Shared
             get { return _identity; }
         }
 
-        public nKanbanIdentity CustomIdentity
-        {
-            get { return _identity; }
-        }
-
         public bool IsInRole(string role)
         {
             return _identity.IsInRole(role);
+        }
+
+        public Guid Id
+        {
+            get
+            {
+                return _identity.Id;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return _identity.Name;
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                return _identity.Email;
+            }
         }
     }
 }
