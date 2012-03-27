@@ -42,9 +42,9 @@ namespace nKanban.Controllers
         {
             get
             {
-                if (Request.IsAuthenticated)
+                if (HttpContext.Request.IsAuthenticated)
                 {
-                    return this.HttpContext.User as nKanbanPrincipal;
+                    return HttpContext.User as nKanbanPrincipal;
                 }
 
                 return null;

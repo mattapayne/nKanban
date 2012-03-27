@@ -18,10 +18,7 @@ namespace nKanban.Services.Impl
             }
 
             _repository = repository;
-            _repository.SetCollectionName(CollectionName);
         }
-
-        protected abstract string CollectionName { get; }
 
         protected IRepository Repository
         {

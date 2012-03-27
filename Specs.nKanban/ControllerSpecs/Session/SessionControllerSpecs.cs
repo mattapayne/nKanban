@@ -29,13 +29,40 @@ namespace Specs.nKanban.ControllerSpecs.Session
         };
     }
 
-    [Subject(typeof(SessionController), ": when instantiating without required dependencies")]
-    public class controller_construction
+    [Subject(typeof(SessionController), ": when instantiating without user service")]
+    public class controller_construction_without_user_service
     {
         static Exception exception;
         static SessionController controller;
+        protected static IUserService userService;
+        protected static ILoginService loginService;
 
-        Because of = () => { exception = Catch.Exception(() => { controller = new SessionController(null, null); }); };
+        Establish ctx = () =>
+        {
+            userService = A.Fake<IUserService>();
+            loginService = A.Fake<ILoginService>();
+        };
+
+        Because of = () => { exception = Catch.Exception(() => { controller = new SessionController(null, loginService); }); };
+
+        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+    }
+
+    [Subject(typeof(SessionController), ": when instantiating without login service")]
+    public class controller_construction_without_login_service
+    {
+        static Exception exception;
+        static SessionController controller;
+        protected static IUserService userService;
+        protected static ILoginService loginService;
+
+        Establish ctx = () =>
+        {
+            userService = A.Fake<IUserService>();
+            loginService = A.Fake<ILoginService>();
+        };
+
+        Because of = () => { exception = Catch.Exception(() => { controller = new SessionController(userService, null); }); };
 
         It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
     }
@@ -107,5 +134,25 @@ namespace Specs.nKanban.ControllerSpecs.Session
         };
 
         It should_redirect_to_the_dashboard_view = () => { result.ShouldBeARedirectToRoute(); };
+    }
+
+    [Subject(typeof(SessionController))]
+    public class the_response_to_delete : context_for_controller
+    {
+        static ActionResult result;
+
+        Because of = () =>
+        {
+            result = controller.Delete();
+        };
+
+        It should_ask_the_login_service_to_logoff = () => { A.CallTo(() => loginService.Logoff()).MustHaveHappened(Repeated.Exactly.Once); };
+
+        It should_have_a_message_in_tempdata = () => { controller.TempData.ShouldNotBeEmpty(); };
+
+        It should_redirect_to_home = () => {
+            var redirectResult = result as RedirectToRouteResult;
+            redirectResult.ShouldRedirectToAction<HomeController>(c => c.Index());
+        };
     }
 }

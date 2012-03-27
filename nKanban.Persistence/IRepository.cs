@@ -11,6 +11,6 @@ namespace nKanban.Persistence
     {
         IEnumerable<T> Query<T>(params Expression<Func<T, bool>>[] query) where T : AbstractDomainObject;
         bool Insert<T>(T item) where T : AbstractDomainObject;
-        void SetCollectionName(string collectionName);
+        bool BulkInsert<T>(params T[] items) where T : AbstractDomainObject;
     }
 }

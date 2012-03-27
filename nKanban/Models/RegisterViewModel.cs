@@ -63,5 +63,15 @@ namespace nKanban.Models
         [Display(Name = "Postal/Zip Code")]
         [StringLength(20, ErrorMessage = "Postal/Zip code cannot be more than 20 characters.")]
         public string PostalCode { get; set; }
+
+        //properties used for New
+        public IEnumerable<SelectListItem> Countries { get; set; }
+        public IEnumerable<SelectListItem> Provinces { get; set; }
+
+        public RegisterViewModel()
+        {
+            Countries = Enumerable.Empty<SelectListItem>();
+            Provinces = Enumerable.Empty<SelectListItem>();
+        }
     }
 }

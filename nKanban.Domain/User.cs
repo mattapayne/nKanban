@@ -12,13 +12,8 @@ namespace nKanban.Domain
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
-        public string OrganizationName { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string City { get; set; }
-        public Guid? ProvinceId { get; set; }
-        public Guid? CountryId { get; set; }
-        public string PostalCode { get; set; }
+        public Guid? OrganizationId { get; set; }
+
         public IEnumerable<string> Roles { get; set; }
 
         public User()

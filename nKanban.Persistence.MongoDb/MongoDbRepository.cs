@@ -13,7 +13,6 @@ namespace nKanban.Persistence.MongoDb
     public class MongoDbRepository : IRepository
     {
         private readonly MongoDatabase _db;
-        private string _collectionName;
 
         public MongoDbRepository(MongoDatabase db)
         {
@@ -27,7 +26,7 @@ namespace nKanban.Persistence.MongoDb
 
         public IEnumerable<T> Query<T>(params Expression<Func<T, bool>>[] filters) where T : AbstractDomainObject
         {
-            var q = _db.GetCollection<T>(_collectionName, SafeMode.True).AsQueryable();
+            var q = _db.GetCollection<T>(GetCollectionName<T>(), SafeMode.True).AsQueryable();
 
             if (filters != null)
             {
@@ -42,13 +41,24 @@ namespace nKanban.Persistence.MongoDb
 
         public bool Insert<T>(T item) where T : AbstractDomainObject
         {
-            var result = _db.GetCollection<T>(_collectionName).Insert(item, SafeMode.True);
+            var result = _db.GetCollection<T>(GetCollectionName<T>()).Insert(item, SafeMode.True);
             return result.Ok;
         }
 
-        public void SetCollectionName(string collectionName)
+        public bool BulkInsert<T>(params T[] items) where T : AbstractDomainObject
         {
-            _collectionName = collectionName;
+            if (items == null || !items.Any())
+            {
+                return false;
+            }
+
+            var results = _db.GetCollection<T>(GetCollectionName<T>()).InsertBatch(items, SafeMode.True);
+            return results.All(r => r.Ok);
+        }
+
+        private string GetCollectionName<T>()
+        {
+            return typeof(T).Name;
         }
     }
 }

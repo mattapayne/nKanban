@@ -17,8 +17,9 @@ namespace nKanban.Controllers
     {
         private readonly IUserService _userService;
         private readonly ILoginService _loginService;
+        private readonly ISimpleService _lookupService;
 
-        public RegisterController(IUserService userService, ILoginService loginService)
+        public RegisterController(IUserService userService, ILoginService loginService, ISimpleService lookupService)
         {
             if (userService == null)
             {
@@ -30,13 +31,22 @@ namespace nKanban.Controllers
                 throw new ArgumentNullException("loginService");
             }
 
+            if (lookupService == null)
+            {
+                throw new ArgumentNullException("lookupService");
+            }
+
+            _lookupService = lookupService;
             _loginService = loginService;
             _userService = userService;
         }
 
         public ActionResult New()
         {
-            return View(new RegisterViewModel());
+            var model = new RegisterViewModel();
+            PopulateRegisterModel(model);
+
+            return View(model);
         }
 
         [HttpPost]
@@ -45,8 +55,19 @@ namespace nKanban.Controllers
             if (ModelState.IsValid)
             {
                 var user = Mapper.Map<User>(model);
+                var organization = Mapper.Map<Organization>(model);
 
-                var errors = _userService.CreateUser(user, model.Password);
+                if (model.CountryId.HasValue)
+                {
+                    organization.Country = _lookupService.Get<Country>(model.CountryId.Value);
+                }
+
+                if (model.ProvinceId.HasValue)
+                {
+                    organization.Province = _lookupService.Get<Province>(model.ProvinceId.Value);
+                }
+
+                var errors = _userService.CreateUser(user, model.Password, organization);
 
                 if (!errors.Any())
                 {
@@ -60,7 +81,33 @@ namespace nKanban.Controllers
                 }
             }
 
+            PopulateRegisterModel(model);
             return View("New", model);
+        }
+
+        private void PopulateRegisterModel(RegisterViewModel model)
+        {
+            var countries = _lookupService.GetAll<Country>().
+                OrderBy(c => c.Name).Select(c => new SelectListItem()
+                                                {
+                                                    Text = c.Name,
+                                                    Value = c.Id.ToString(),
+                                                    Selected = model.CountryId.HasValue && model.CountryId.Value == c.Id
+                                                }).ToList();
+            model.Countries = countries;
+
+            if (model.CountryId.HasValue)
+            {
+                var provinces = _lookupService.GetAll<Province>(p => p.CountryId == model.CountryId.Value).
+                    OrderBy(p => p.Name).Select(p => new SelectListItem() 
+                                                    { 
+                                                        Selected = model.ProvinceId.HasValue && model.ProvinceId.Value == p.Id,
+                                                        Text = p.Name,
+                                                        Value = p.Id.ToString()
+                                                    }).ToList();
+
+                model.Provinces = provinces;
+            }
         }
     }
 }

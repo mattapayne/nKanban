@@ -37,7 +37,21 @@ namespace nKanban.Services.Impl
 
         public void Logoff()
         {
-            FormsAuthentication.SignOut();
+            var cookie = _context.Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (cookie != null)
+            {
+                //create a new expired cookie based on this one
+                var expired = new HttpCookie(FormsAuthentication.FormsCookieName);
+
+                expired.HttpOnly = true;
+                expired.Path = FormsAuthentication.FormsCookiePath;
+                expired.Expires = DateTime.UtcNow.AddDays(-2);
+                expired.Secure = FormsAuthentication.RequireSSL;
+
+                _context.Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
+                _context.Response.Cookies.Add(expired);
+            }
         }
     }
 }

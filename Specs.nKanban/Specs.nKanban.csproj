@@ -71,9 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllerSpecs\AbstractBase\AbstractBaseControllerSpecs.cs" />
+    <Compile Include="ControllerSpecs\AbstractBase\StubController.cs" />
     <Compile Include="ControllerSpecs\Dashboard\DashboardControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\ForgotPassword\ForgotPasswordControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\Home\HomeControllerSpecs.cs" />
+    <Compile Include="ControllerSpecs\Lookup\LookupControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\Register\RegisterControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\Session\SessionControllerSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

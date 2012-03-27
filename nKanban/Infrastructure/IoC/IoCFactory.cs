@@ -23,6 +23,11 @@ namespace nKanban.Infrastructure.IoC
             return new SmDependencyResolver(ObjectFactory.Container);
         }
 
+        public static T GetService<T>()
+        {
+            return ObjectFactory.GetInstance<T>();
+        }
+
         private static void Bootstrap()
         {
             ObjectFactory.Configure(c =>

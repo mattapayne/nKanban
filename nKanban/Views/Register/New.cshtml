@@ -81,13 +81,13 @@
         <div class="control-group">
             @Html.LabelFor(m => m.ProvinceId, new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownListFor(m => m.ProvinceId, new List<SelectListItem>(), new { @class = "input-medium" })
+                @Html.DropDownListFor(m => m.ProvinceId, Model.Provinces, String.Empty, new { @class = "input-medium" })
             </div>
         </div>
         <div class="control-group">
             @Html.LabelFor(m => m.CountryId, new { @class = "control-label" })
             <div class="controls">
-                @Html.DropDownListFor(m => m.CountryId, new List<SelectListItem>(), new { @class = "input-medium" })
+                @Html.DropDownListFor(m => m.CountryId, Model.Countries, String.Empty, new { @class = "input-medium" })
             </div>
         </div>
         <div class="control-group">
@@ -102,3 +102,5 @@
         </div>
     </fieldset>
 }
+@Html.Hidden("ProvinceLookupUrl", Url.Action("Provinces", "Lookup"))
+<script type="text/javascript" src="@Url.Content("~/Scripts/Register/new.js")"></script>

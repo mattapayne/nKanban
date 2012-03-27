@@ -26,6 +26,19 @@ namespace nKanban.Shared
             }
         }
 
+        public nKanbanIdentity(Guid? id, string name, string email, IEnumerable<string> roles)
+        {
+            if (id.HasValue)
+            {
+                this._authenticated = true;
+                this._id = id.Value;
+            }
+
+            this.Name = name;
+            this.Email = email;
+            this.Roles = roles == null ? Enumerable.Empty<string>().ToList() : roles.ToList();
+        }
+
         public nKanbanIdentity(IIdentity identity)
         {
             if (identity is FormsIdentity)

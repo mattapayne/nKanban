@@ -25,7 +25,7 @@ namespace nKanban.Services.Impl
             return !exists;
         }
 
-        public IEnumerable<ServiceError> CreateUser(User user, string password)
+        public IEnumerable<ServiceError> CreateUser(User user, string password, Organization organization)
         {
             var errors = new List<ServiceError>();
 
@@ -44,13 +44,37 @@ namespace nKanban.Services.Impl
                 errors.Add(new ServiceError("Email", "Sorry, that username is taken."));
             }
 
+            if (organization != null && !String.IsNullOrEmpty(organization.Name))
+            {
+                if (OrganizationExists(organization.Name))
+                {
+                    errors.Add(new ServiceError("OrganizationName", "Sorry, an organization by that name has already registered."));
+                }
+            }
+
             if (!errors.Any())
             {
-                user.PasswordSalt = GenerateSalt();
-                user.PasswordHash = HashPassword(password, user.PasswordSalt);
-                user.DateCreated = DateTime.UtcNow;
+                if (organization != null && !String.IsNullOrEmpty(organization.Name))
+                {
+                    //save the organization
+                    if (Repository.Insert<Organization>(organization))
+                    {
+                        user.OrganizationId = organization.Id;
+                    }
+                    else
+                    {
+                        errors.Add(new ServiceError(String.Empty, "Sorry, an error occurred while saving the organization."));
+                    }
+                }
 
-                Repository.Insert<User>(user);
+                if (!errors.Any())
+                {
+                    user.PasswordSalt = GenerateSalt();
+                    user.PasswordHash = HashPassword(password, user.PasswordSalt);
+                    user.DateCreated = DateTime.UtcNow;
+
+                    Repository.Insert<User>(user);
+                }
             }
 
             return errors;
@@ -89,11 +113,6 @@ namespace nKanban.Services.Impl
             return Repository.Query<User>(u => u.Email == username).FirstOrDefault();
         }
 
-        protected override string CollectionName
-        {
-            get { return "Users"; }
-        }
-
         private string GenerateSalt()
         {
             var rng = new RNGCryptoServiceProvider();
@@ -106,6 +125,16 @@ namespace nKanban.Services.Impl
         {
             var concatenatedPasswordAndSalt = String.Format("{0}{1}", password, salt);
             return FormsAuthentication.HashPasswordForStoringInConfigFile(concatenatedPasswordAndSalt, "MD5");
+        }
+
+        private bool OrganizationExists(string organizationName)
+        {
+            if (String.IsNullOrEmpty(organizationName))
+            {
+                return false;
+            }
+
+            return Repository.Query<Organization>(o => o.Name.ToLower() == organizationName.ToLower()).Any();
         }
     }
 }

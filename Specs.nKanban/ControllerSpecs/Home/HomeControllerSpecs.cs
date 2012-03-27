@@ -22,9 +22,9 @@ namespace Specs.nKanban.ControllerSpecs.Home
     [Subject(typeof(HomeController), ": when I go to the root page")]
     public class the_root_response : context_for_controller
     {
-        static ActionResult result;
+        static ViewResult result;
 
-        Because of = () => { result = controller.Index(); };
+        Because of = () => { result = controller.Index() as ViewResult; };
 
         It should_show_the_root_view = () => { result.ShouldBeAView(); };
     }
@@ -32,9 +32,9 @@ namespace Specs.nKanban.ControllerSpecs.Home
     [Subject(typeof(HomeController), ": when I go to the About page")]
     public class the_about_response : context_for_controller
     {
-        static ActionResult result;
+        static ViewResult result;
 
-        Because of = () => { result = controller.Index(); };
+        Because of = () => { result = controller.About() as ViewResult; };
 
         It should_show_the_about_view = () => { result.ShouldBeAView(); };
     }

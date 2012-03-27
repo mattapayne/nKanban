@@ -37,21 +37,6 @@ namespace Specs.nKanban.ServiceSpecs.UserSvc
     }
 
     [Subject(typeof(UserService))]
-    public class construction_with_dependencies
-    {
-        protected static UserService service;
-        protected static IRepository repo;
-
-        Establish ctx = () =>
-        {
-            repo = A.Fake<IRepository>();
-            service = new UserService(repo);
-        };
-
-        It should_set_the_collection_name_on_the_repository = () => { A.CallTo(() => repo.SetCollectionName("Users")).MustHaveHappened(Repeated.Exactly.Once); };
-    }
-
-    [Subject(typeof(UserService))]
     public class when_verifying_login_for_non_existent_user : context_for_service
     {
         static IEnumerable<ServiceError> errors;
@@ -128,7 +113,7 @@ namespace Specs.nKanban.ServiceSpecs.UserSvc
 
         Establish ctx = () => { user = new User(); };
 
-        Because of = () => { service.CreateUser(user, password); };
+        Because of = () => { service.CreateUser(user, password, null); };
 
         It should_check_that_the_users_email_is_unique = () => { A.CallTo(() => repo.Query<User>(A<Expression<Func<User, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once); };
 
@@ -146,7 +131,7 @@ namespace Specs.nKanban.ServiceSpecs.UserSvc
     {
         static IEnumerable<ServiceError> errors;
 
-        Because of = () => { errors = service.CreateUser(null, "password"); };
+        Because of = () => { errors = service.CreateUser(null, "password", null); };
 
         It should_not_delegate_to_the_repository = () => { A.CallTo(() => repo.Insert<User>(A<User>.Ignored)).MustNotHaveHappened(); };
 
@@ -158,7 +143,7 @@ namespace Specs.nKanban.ServiceSpecs.UserSvc
     {
         static IEnumerable<ServiceError> errors;
 
-        Because of = () => { errors = service.CreateUser(new User(), String.Empty); };
+        Because of = () => { errors = service.CreateUser(new User(), String.Empty, null); };
 
         It should_not_delegate_to_the_repository = () => { A.CallTo(() => repo.Insert<User>(A<User>.Ignored)).MustNotHaveHappened(); };
 
@@ -175,7 +160,7 @@ namespace Specs.nKanban.ServiceSpecs.UserSvc
             A.CallTo(() => repo.Query<User>(A<Expression<Func<User, bool>>[]>.Ignored)).Returns(users);
         };
 
-        Because of = () => { errors = service.CreateUser(new User() { Email= "test@test.ca" }, "password"); };
+        Because of = () => { errors = service.CreateUser(new User() { Email= "test@test.ca" }, "password", null); };
 
         It should_not_delegate_to_the_repository = () => { A.CallTo(() => repo.Insert<User>(A<User>.Ignored)).MustNotHaveHappened(); };
 
