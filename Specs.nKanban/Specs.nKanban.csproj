@@ -61,6 +61,7 @@
       <HintPath>..\packages\mongocsharpdriver.1.3.1\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -79,6 +80,12 @@
     <Compile Include="ControllerSpecs\Lookup\LookupControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\Register\RegisterControllerSpecs.cs" />
     <Compile Include="ControllerSpecs\Session\SessionControllerSpecs.cs" />
+    <Compile Include="DomainModelSpecs\Abstract\AbstractDomainModelSpec.cs" />
+    <Compile Include="DomainModelSpecs\Abstract\StubDomainObject.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensionSpecs.cs" />
+    <Compile Include="Extensions\TestModel.cs" />
+    <Compile Include="Extensions\TestModel2.cs" />
+    <Compile Include="FilterSpecs\AnonymousOnlyFilterSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositorySpecs\MongoDbRepositorySpecs.cs" />
     <Compile Include="ServiceSpecs\Login\LoginServiceSpec.cs" />

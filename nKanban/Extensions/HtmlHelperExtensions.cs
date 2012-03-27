@@ -20,10 +20,11 @@ namespace nKanban.Extensions
 
             var hash = new RouteValueDictionary(htmlAttributes);
             var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
+            var displayName = metadata.DisplayName ?? metadata.PropertyName;
 
             var attrs = String.Join(" ", hash.Select(kvp => String.Format("{0}=\"{1}\"", kvp.Key, kvp.Value)).ToArray());
 
-            return MvcHtmlString.Create(String.Format("<label for=\"{0}\" {1}>{2}</label>", metadata.PropertyName, attrs, metadata.DisplayName));
+            return MvcHtmlString.Create(String.Format("<label for=\"{0}\" {1}>{2}</label>", metadata.PropertyName, attrs, displayName));
         }
     }
 }
