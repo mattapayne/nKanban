@@ -49,12 +49,14 @@ namespace nKanban
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
             //TODO - Add code to ignore requests for assets like images, js, css, etc
-            if (HttpContext.Current != null && HttpContext.Current.User != null)
+            if (HttpContext.Current == null || HttpContext.Current.User == null)
             {
-                var customPrincipal = new nKanbanPrincipal(new nKanbanIdentity(HttpContext.Current.User.Identity));
-                HttpContext.Current.User = customPrincipal;
-                Thread.CurrentPrincipal = customPrincipal;
+                return;
             }
+
+            var customPrincipal = new nKanbanPrincipal(new nKanbanIdentity(HttpContext.Current.User.Identity));
+            HttpContext.Current.User = customPrincipal;
+            Thread.CurrentPrincipal = customPrincipal;
         }
     }
 }

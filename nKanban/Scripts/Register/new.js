@@ -1,41 +1,34 @@
-﻿$(function () {
-    var provinceLookupUrl = $("#ProvinceLookupUrl").val();
 
-    var clearDDL = function (ddl) {
-        $(ddl).find("option").remove();
-    };
-
-    var addLoadingIndicator = function (ddl) {
-        var opt = $(document.createElement("option")).val("").text("Loading ...");
-        $(ddl).append(opt);
-    };
-
-    var createSelectOption = function (value, text) {
-        return $(document.createElement("option")).val(value).text(text);
-    };
-
-    $("#CountryId").change(function () {
-
-        var provinceDDL = $("#ProvinceId");
-
+jQuery(function() {
+  var addLoadingIndicator, clearDDL, createSelectOption, provinceLookupUrl;
+  provinceLookupUrl = jQuery("#ProvinceLookupUrl").val();
+  clearDDL = function(ddl) {
+    return jQuery(ddl).find("option").remove();
+  };
+  addLoadingIndicator = function(ddl) {
+    var opt;
+    opt = jQuery(document.createElement("option")).val("").text("Loading ...");
+    return jQuery(ddl).append(opt);
+  };
+  createSelectOption = function(value, text) {
+    var opt;
+    opt = jQuery(document.createElement("option")).val(value).text(text);
+    return opt;
+  };
+  return jQuery("#CountryId").change(function() {
+    var countryId, provinceDDL;
+    provinceDDL = jQuery("#ProvinceId");
+    clearDDL(provinceDDL);
+    countryId = jQuery(this).val();
+    if (countryId) {
+      addLoadingIndicator(provinceDDL);
+      return jQuery.getJSON(provinceLookupUrl + "/" + countryId, null, function(provinces) {
         clearDDL(provinceDDL);
-
-        var countryId = $(this).val();
-
-        if (countryId) {
-
-            addLoadingIndicator(provinceDDL);
-
-            $.getJSON(provinceLookupUrl + "/" + countryId, null, function (provinces) {
-
-                clearDDL(provinceDDL);
-
-                provinceDDL.append(createSelectOption("", ""));
-
-                $.each(provinces, function (index, item) {
-                    provinceDDL.append(createSelectOption(item.Id, item.Name));
-                });
-            });
-        }
-    });
+        provinceDDL.append(createSelectOption("", ""));
+        return $.each(provinces, function(index, item) {
+          return provinceDDL.append(createSelectOption(item.Id, item.Name));
+        });
+      });
+    }
+  });
 });
