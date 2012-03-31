@@ -141,11 +141,13 @@
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.18.js" />
     <Content Include="Scripts\jquery-ui-1.8.18.min.js" />
-    <Content Include="Scripts\navbar.js" />
+    <Content Include="Scripts\navbar.js">
+      <DependentUpon>navbar.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\navbar_old.js" />
     <Content Include="Scripts\Register\new.js">
       <DependentUpon>new.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\Register\new_original.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
@@ -209,10 +211,15 @@
     <Content Include="Views\Dashboard\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Scripts\navbar.coffee">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+      <Bare>True</Bare>
+    </None>
     <None Include="Scripts\Register\new.coffee">
       <Compile>True</Compile>
       <Minify>True</Minify>
-      <Bare>False</Bare>
+      <Bare>True</Bare>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
