@@ -25,9 +25,9 @@ namespace Specs.nKanban.ControllerSpecs.AbstractBase
     [Subject(typeof(AbstractBaseController))]
     public class adding_null_service_errors : context_for_controller
     {
-        Because of = () => { controller.AddServiceErrorsPub(null); };
+        Because of = () => controller.AddServiceErrorsPub(null);
 
-        It should_have_no_modelstate_errors = () => { controller.ModelState.ShouldBeEmpty(); };
+        It should_have_no_modelstate_errors = () => controller.ModelState.ShouldBeEmpty();
     }
 
     [Subject(typeof(AbstractBaseController))]
@@ -37,27 +37,27 @@ namespace Specs.nKanban.ControllerSpecs.AbstractBase
 
         Establish ctx = () => { errors = new List<ServiceError>() { new ServiceError("PropertyName", "ErrorMessage") }; };
 
-        Because of = () => { controller.AddServiceErrorsPub(errors); };
+        Because of = () => controller.AddServiceErrorsPub(errors);
 
-        It should_have_modelstate_errors = () => { controller.ModelState.ShouldNotBeEmpty(); };
+        It should_have_modelstate_errors = () => controller.ModelState.ShouldNotBeEmpty();
     }
 
     [Subject(typeof(AbstractBaseController))]
     public class setting_empty_redirect_message : context_for_controller
     {
-        Because of = () => { controller.SetRedirectMessagePub(MessageType.Success, String.Empty); };
+        Because of = () => controller.SetRedirectMessagePub(MessageType.Success, String.Empty);
 
-        It should_have_no_messages_in_tempdata = () => { controller.TempData.ShouldBeEmpty(); };
+        It should_have_no_messages_in_tempdata = () => controller.TempData.ShouldBeEmpty();
     }
 
     [Subject(typeof(AbstractBaseController))]
     public class setting_redirect_message : context_for_controller
     {
-        Because of = () => { controller.SetRedirectMessagePub(MessageType.Success, "This is an error"); };
+        Because of = () => controller.SetRedirectMessagePub(MessageType.Success, "This is an error");
 
-        It should_have_no_messages_in_tempdata = () => { controller.TempData.ShouldNotBeEmpty(); };
+        It should_have_no_messages_in_tempdata = () => controller.TempData.ShouldNotBeEmpty();
 
-        It should_use_the_message_type_as_the_key = () => { controller.TempData.Keys.First().ShouldEqual(MessageType.Success.ToString()); };
+        It should_use_the_message_type_as_the_key = () => controller.TempData.Keys.First().ShouldEqual(MessageType.Success.ToString());
     }
 
     [Subject(typeof(AbstractBaseController))]
@@ -78,11 +78,11 @@ namespace Specs.nKanban.ControllerSpecs.AbstractBase
             loggedin = controller.IsLoggedInPub;
         };
 
-        It it_should_return_the_logged_in_user = () => { user.ShouldNotBeNull(); };
+        It it_should_return_the_logged_in_user = () => user.ShouldNotBeNull();
 
-        It should_be_the_correct_user = () => { user.Name.ShouldEqual("Test User"); };
+        It should_be_the_correct_user = () => user.Name.ShouldEqual("Test User");
 
-        It should_be_logged_in = () => { loggedin.ShouldBeTrue(); };
+        It should_be_logged_in = () => loggedin.ShouldBeTrue();
     }
 
     [Subject(typeof(AbstractBaseController))]
@@ -91,10 +91,7 @@ namespace Specs.nKanban.ControllerSpecs.AbstractBase
         static nKanbanPrincipal user;
         static bool loggedin;
 
-        Establish ctx = () =>
-        {
-            TestUtilities.StubLoggedInStatus(controller, null, false);
-        };
+        Establish ctx = () => TestUtilities.StubLoggedInStatus(controller, null, false);
 
         Because of = () =>
         {
@@ -102,8 +99,8 @@ namespace Specs.nKanban.ControllerSpecs.AbstractBase
             loggedin = controller.IsLoggedInPub;
         };
 
-        It it_should_return_no_user = () => { user.ShouldBeNull(); };
+        It it_should_return_no_user = () => user.ShouldBeNull();
 
-        It should_not_be_logged_in = () => { loggedin.ShouldBeFalse(); };
+        It should_not_be_logged_in = () => loggedin.ShouldBeFalse();
     }
 }

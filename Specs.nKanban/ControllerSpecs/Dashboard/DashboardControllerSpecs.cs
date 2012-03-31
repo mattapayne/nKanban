@@ -32,7 +32,7 @@ namespace Specs.nKanban.ControllerSpecs.Dashboard
 
         Because of = () => { exception = Catch.Exception(() => { new DashboardController(null); }); };
 
-        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+        It should_throw_an_exception = () => exception.ShouldNotBeNull();
     }
 
     [Subject(typeof(DashboardController), ": when I go to the Dashboard page")]
@@ -42,6 +42,6 @@ namespace Specs.nKanban.ControllerSpecs.Dashboard
 
         Because of = () => { result = controller.Show(); };
 
-        It should_show_the_dashboard_view = () => { result.ShouldBeAView(); };
+        It should_show_the_dashboard_view = () => result.ShouldBeAView();
     }
 }

@@ -26,8 +26,8 @@ namespace Specs.nKanban.ControllerSpecs.ForgotPassword
 
         Because of = () => { result = controller.New(); };
 
-        It should_show_the_forgot_password_view = () => { result.ShouldBeAView(); };
+        It should_show_the_forgot_password_view = () => result.ShouldBeAView();
 
-        It should_have_a_forgot_password_view_model = () => { ((ViewResult)result).ShouldHaveModelOfType<ForgotPasswordViewModel>(); };
+        It should_have_a_forgot_password_view_model = () => ((ViewResult)result).ShouldHaveModelOfType<ForgotPasswordViewModel>();
     }
 }

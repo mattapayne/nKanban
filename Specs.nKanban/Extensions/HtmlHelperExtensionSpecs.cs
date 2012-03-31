@@ -36,35 +36,35 @@ namespace Specs.nKanban.Extensions
     public class when_rendering_labels_with_no_additional_attributes : context_for_helper
     {
         static MvcHtmlString html;
-        static string result = "<label for=\"Name\">Name</label>";
+        private const string result = "<label for=\"Name\">Name</label>";
 
         Because of = () => {
 
             html = helper.LabelFor(m => m.Name, null);
         };
 
-        It should_not_have_any_additional_html = () => { html.ToString().ShouldBeEqualIgnoringCase(result); };
+        It should_not_have_any_additional_html = () => html.ToString().ShouldBeEqualIgnoringCase(result);
     }
 
     [Subject(typeof(HtmlHelper))]
     public class when_rendering_labels_with_additional_attributes : context_for_helper
     {
         static MvcHtmlString html;
-        static string result = "<label for=\"Name\" class=\"test-class\" data_val=\"some-val\">Name</label>";
+        private const string result = "<label for=\"Name\" class=\"test-class\" data_val=\"some-val\">Name</label>";
 
         Because of = () =>
         {
             html = helper.LabelFor(m => m.Name, new { @class= "test-class", data_val = "some-val" });
         };
 
-        It should_have_additional_html = () => { html.ToString().ShouldBeEqualIgnoringCase(result); };
+        It should_have_additional_html = () => html.ToString().ShouldBeEqualIgnoringCase(result);
     }
 
     [Subject(typeof(HtmlHelper))]
     public class when_rendering_labels_where_display_name_is_set
     {
         static MvcHtmlString html;
-        static string result = "<label for=\"Name\">FullName</label>";
+        private const string result = "<label for=\"Name\">FullName</label>";
         static HtmlHelper<TestModel2> helper;
         static TestModel2 model;
 
@@ -88,6 +88,6 @@ namespace Specs.nKanban.Extensions
             html = helper.LabelFor(m => m.Name, null);
         };
 
-        It should_render_the_display_name = () => { html.ToString().ShouldBeEqualIgnoringCase(result); };
+        It should_render_the_display_name = () => html.ToString().ShouldBeEqualIgnoringCase(result);
     }
 }

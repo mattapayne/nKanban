@@ -23,7 +23,7 @@ namespace nKanban.Filters
         {
             if (filterContext.HttpContext.Request.IsAuthenticated)
             {
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary() { 
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { 
                     { "Controller", ControllerToRedirectToIfAuthenticated}, { "Action", ActionToRedirectToIfAuthenticated } 
                 });
 

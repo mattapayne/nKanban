@@ -60,7 +60,7 @@ namespace Specs.nKanban.ControllerSpecs.Register
 
         Because of = () => { exception = Catch.Exception(() => { controller = new RegisterController(userService, loginService, null); }); };
 
-        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+        It should_throw_an_exception = () => exception.ShouldNotBeNull();
     }
 
     [Subject(typeof(RegisterController), ": when instantiating without login service")]
@@ -81,7 +81,7 @@ namespace Specs.nKanban.ControllerSpecs.Register
 
         Because of = () => { exception = Catch.Exception(() => { controller = new RegisterController(userService, null, lookupService); }); };
 
-        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+        It should_throw_an_exception = () => exception.ShouldNotBeNull();
     }
 
     [Subject(typeof(RegisterController), ": when instantiating without user service")]
@@ -102,7 +102,7 @@ namespace Specs.nKanban.ControllerSpecs.Register
 
         Because of = () => { exception = Catch.Exception(() => { controller = new RegisterController(null, loginService, lookupService); }); };
 
-        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+        It should_throw_an_exception = () => exception.ShouldNotBeNull();
     }
 
     [Subject(typeof(RegisterController), ": when I go to the Register page")]
@@ -112,13 +112,11 @@ namespace Specs.nKanban.ControllerSpecs.Register
 
         Because of = () => { result = controller.New(); };
 
-        It should_show_the_register_view = () => { result.ShouldBeAView(); };
+        It should_show_the_register_view = () => result.ShouldBeAView();
 
-        It should_have_a_register_view_model = () => { ((ViewResult)result).ShouldHaveModelOfType<RegisterViewModel>(); };
+        It should_have_a_register_view_model = () => ((ViewResult)result).ShouldHaveModelOfType<RegisterViewModel>();
 
-        It should_load_the_countries = () => {
-            A.CallTo(() => lookupService.GetAll<Country>(A<Expression<Func<Country, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
-        };
+        It should_load_the_countries = () => A.CallTo(() => lookupService.GetAll<Country>(A<Expression<Func<Country, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
         It should_have_a_collection_of_countries = () => {
             var model = ((ViewResult)result).Model as RegisterViewModel;
@@ -139,13 +137,11 @@ namespace Specs.nKanban.ControllerSpecs.Register
             result = controller.Create(model); 
         };
 
-        It should_rerender_the_register_view = () => { result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New"); };
+        It should_rerender_the_register_view = () => result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New");
 
-        It should_maintain_the_original_model = () => { ((ViewResult)result).Model.ShouldBeTheSameAs(model); };
+        It should_maintain_the_original_model = () => ((ViewResult)result).Model.ShouldBeTheSameAs(model);
 
-        It should_reload_the_countries = () => {
-            A.CallTo(() => lookupService.GetAll<Country>(A<Expression<Func<Country, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
-        };
+        It should_reload_the_countries = () => A.CallTo(() => lookupService.GetAll<Country>(A<Expression<Func<Country, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
         It should_have_a_collection_of_countries = () =>
         {
@@ -169,18 +165,13 @@ namespace Specs.nKanban.ControllerSpecs.Register
             result = controller.Create(model);
         };
 
-        It should_rerender_the_register_view = () => { result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New"); };
+        It should_rerender_the_register_view = () => result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New");
 
-        It should_maintain_the_original_model = () => { ((ViewResult)result).Model.ShouldBeTheSameAs(model); };
+        It should_maintain_the_original_model = () => ((ViewResult)result).Model.ShouldBeTheSameAs(model);
 
-        It should_reload_the_countries = () =>
-        {
-            A.CallTo(() => lookupService.GetAll<Country>(A<Expression<Func<Country, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
-        };
+        It should_reload_the_countries = () => A.CallTo(() => lookupService.GetAll<Country>(A<Expression<Func<Country, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_reload_the_provinces = () => {
-            A.CallTo(() => lookupService.GetAll<Province>(A<Expression<Func<Province, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
-        };
+        It should_reload_the_provinces = () => A.CallTo(() => lookupService.GetAll<Province>(A<Expression<Func<Province, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
         It should_have_a_collection_of_countries = () =>
         {
@@ -220,11 +211,11 @@ namespace Specs.nKanban.ControllerSpecs.Register
             result = controller.Create(model);
         };
 
-        It should_create_the_user = () => { A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored, A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_create_the_user = () => A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored, A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_log_the_user_in = () => { A.CallTo(() => loginService.LoginUser(A<User>.Ignored, false)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_log_the_user_in = () => A.CallTo(() => loginService.LoginUser(A<User>.Ignored, false)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_redirect_to_the_dashboard = () => { result.ShouldBeARedirectToRoute(); };
+        It should_redirect_to_the_dashboard = () => result.ShouldBeARedirectToRoute();
 
         It should_have_a_success_message = () => 
         {
@@ -264,13 +255,13 @@ namespace Specs.nKanban.ControllerSpecs.Register
             result = controller.Create(model);
         };
 
-        It should_lookup_the_country = () => { A.CallTo(() => lookupService.Get<Country>(countryId)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_lookup_the_country = () => A.CallTo(() => lookupService.Get<Country>(countryId)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_create_the_user = () => { A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored, A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_create_the_user = () => A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored, A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_log_the_user_in = () => { A.CallTo(() => loginService.LoginUser(A<User>.Ignored, false)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_log_the_user_in = () => A.CallTo(() => loginService.LoginUser(A<User>.Ignored, false)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_redirect_to_the_dashboard = () => { result.ShouldBeARedirectToRoute(); };
+        It should_redirect_to_the_dashboard = () => result.ShouldBeARedirectToRoute();
 
         It should_have_a_success_message = () =>
         {
@@ -310,13 +301,13 @@ namespace Specs.nKanban.ControllerSpecs.Register
             result = controller.Create(model);
         };
 
-        It should_lookup_the_province = () => { A.CallTo(() => lookupService.Get<Province>(provinceId)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_lookup_the_province = () => A.CallTo(() => lookupService.Get<Province>(provinceId)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_create_the_user = () => { A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored, A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_create_the_user = () => A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored, A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_log_the_user_in = () => { A.CallTo(() => loginService.LoginUser(A<User>.Ignored, false)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_log_the_user_in = () => A.CallTo(() => loginService.LoginUser(A<User>.Ignored, false)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_redirect_to_the_dashboard = () => { result.ShouldBeARedirectToRoute(); };
+        It should_redirect_to_the_dashboard = () => result.ShouldBeARedirectToRoute();
 
         It should_have_a_success_message = () =>
         {
@@ -351,16 +342,13 @@ namespace Specs.nKanban.ControllerSpecs.Register
             result = controller.Create(model);
         };
 
-        It should_attempt_to_create_the_user = () => { A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored, A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_attempt_to_create_the_user = () => A.CallTo(() => userService.CreateUser(A<User>.Ignored, A<String>.Ignored, A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_not_log_the_user_in = () => { A.CallTo(() => loginService.LoginUser(A<User>.Ignored, A<bool>.Ignored)).MustNotHaveHappened(); };
+        It should_not_log_the_user_in = () => A.CallTo(() => loginService.LoginUser(A<User>.Ignored, A<bool>.Ignored)).MustNotHaveHappened();
 
-        It should_rerender_the_register_view = () => { result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New"); };
+        It should_rerender_the_register_view = () => result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New");
 
-        It should_have_an_error_message = () =>
-        {
-            controller.ModelState.ShouldNotBeEmpty();
-        };
+        It should_have_an_error_message = () => controller.ModelState.ShouldNotBeEmpty();
 
         It should_have_the_original_model_in_viewdata = () => 
         {

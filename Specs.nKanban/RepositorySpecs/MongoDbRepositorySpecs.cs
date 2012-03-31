@@ -21,6 +21,6 @@ namespace Specs.nKanban.RepositorySpecs
 
         Because of = () => { exception = Catch.Exception(() => { new MongoDbRepository(null); }); };
 
-        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+        It should_throw_an_exception = () => exception.ShouldNotBeNull();
     }
 }

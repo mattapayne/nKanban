@@ -26,7 +26,7 @@ namespace Specs.nKanban.ControllerSpecs.Home
 
         Because of = () => { result = controller.Index() as ViewResult; };
 
-        It should_show_the_root_view = () => { result.ShouldBeAView(); };
+        It should_show_the_root_view = () => result.ShouldBeAView();
     }
 
     [Subject(typeof(HomeController), ": when I go to the About page")]
@@ -36,6 +36,6 @@ namespace Specs.nKanban.ControllerSpecs.Home
 
         Because of = () => { result = controller.About() as ViewResult; };
 
-        It should_show_the_about_view = () => { result.ShouldBeAView(); };
+        It should_show_the_about_view = () => result.ShouldBeAView();
     }
 }

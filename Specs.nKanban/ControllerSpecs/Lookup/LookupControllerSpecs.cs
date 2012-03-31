@@ -32,7 +32,7 @@ namespace Specs.nKanban.ControllerSpecs.Lookup
 
         Because of = () => { exception = Catch.Exception(() => { new LookupController(null); }); };
 
-        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+        It should_throw_an_exception = () => exception.ShouldNotBeNull();
     }
 
     [Subject(typeof(LookupController))]
@@ -49,11 +49,9 @@ namespace Specs.nKanban.ControllerSpecs.Lookup
 
         Because of = () => { result = controller.Provinces(countryId); };
 
-        It should_ask_the_simple_service_for_provinces = () => {
-            A.CallTo(() => simpleService.GetAll<Province>(A<Expression<Func<Province, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
-        };
+        It should_ask_the_simple_service_for_provinces = () => A.CallTo(() => simpleService.GetAll<Province>(A<Expression<Func<Province, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_be_a_json_result = () => { result.ShouldBeOfType<JsonResult>(); };
+        It should_be_a_json_result = () => result.ShouldBeOfType<JsonResult>();
 
         It should_allow_get = () => {
             var jsonResult = result as JsonResult;

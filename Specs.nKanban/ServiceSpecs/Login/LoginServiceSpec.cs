@@ -34,7 +34,7 @@ namespace Specs.nKanban.ServiceSpecs.LoginSvc
 
         Because of = () => { exception = Catch.Exception(() => new LoginService(null) ); };
 
-        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+        It should_throw_an_exception = () => exception.ShouldNotBeNull();
     }
 
     [Subject(typeof(LoginService))]
@@ -70,12 +70,12 @@ namespace Specs.nKanban.ServiceSpecs.LoginSvc
             userData = TestUtilities.DeconstructAuthCookie(ctx);
         };
 
-        It should_set_a_cookie = () => { ctx.Request.Cookies.ShouldNotBeEmpty(); };
+        It should_set_a_cookie = () => ctx.Request.Cookies.ShouldNotBeEmpty();
 
-        It should_have_user_data = () => { userData.ShouldNotBeEmpty(); };
+        It should_have_user_data = () => userData.ShouldNotBeEmpty();
 
-        It should_have_user_email = () => { userData.ShouldContain("test@test.ca"); };
+        It should_have_user_email = () => userData.ShouldContain("test@test.ca");
 
-        It should_have_user_full_name = () => { userData.ShouldContain("First Last"); };
+        It should_have_user_full_name = () => userData.ShouldContain("First Last");
     }
 }

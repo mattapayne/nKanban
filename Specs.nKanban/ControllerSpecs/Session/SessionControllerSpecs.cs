@@ -45,7 +45,7 @@ namespace Specs.nKanban.ControllerSpecs.Session
 
         Because of = () => { exception = Catch.Exception(() => { controller = new SessionController(null, loginService); }); };
 
-        It should_throw_an_exception = () => { exception.ShouldNotBeNull(); };
+        It should_throw_an_exception = () => exception.ShouldNotBeNull();
     }
 
     [Subject(typeof(SessionController), ": when instantiating without login service")]
@@ -74,9 +74,9 @@ namespace Specs.nKanban.ControllerSpecs.Session
 
         Because of = () => { result = controller.New(); };
 
-        It should_show_the_login_view = () => { result.ShouldBeAView(); };
+        It should_show_the_login_view = () => result.ShouldBeAView();
 
-        It should_have_a_login_view_model = () => { ((ViewResult)result).ShouldHaveModelOfType<LoginViewModel>(); };
+        It should_have_a_login_view_model = () => ((ViewResult)result).ShouldHaveModelOfType<LoginViewModel>();
     }
 
     [Subject(typeof(SessionController), ": when I try to Login with missing or invalid data")]
@@ -92,9 +92,9 @@ namespace Specs.nKanban.ControllerSpecs.Session
             result = controller.Create(model);
         };
 
-        It should_rerender_the_register_view = () => { result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New"); };
+        It should_rerender_the_register_view = () => result.ShouldBeAView().And().ViewName.Should().ContainEquivalentOf("New");
 
-        It should_maintain_the_original_model = () => { ((ViewResult)result).Model.ShouldBeTheSameAs(model); };
+        It should_maintain_the_original_model = () => ((ViewResult)result).Model.ShouldBeTheSameAs(model);
     }
 
     [Subject(typeof(SessionController), ": when I try to Login with valid data")]
@@ -118,22 +118,13 @@ namespace Specs.nKanban.ControllerSpecs.Session
             result = controller.Create(model);
         };
 
-        It should_ask_the_service_to_verify_the_credentials = () => 
-        {
-            A.CallTo(() => userService.VerifyLogin("test@test.ca", "password")).MustHaveHappened(Repeated.Exactly.Once);
-        };
+        It should_ask_the_service_to_verify_the_credentials = () => A.CallTo(() => userService.VerifyLogin("test@test.ca", "password")).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_ask_the_service_to_get_the_user = () => 
-        {
-            A.CallTo(() => userService.GetUser("test@test.ca")).MustHaveHappened(Repeated.Exactly.Once);
-        };
+        It should_ask_the_service_to_get_the_user = () => A.CallTo(() => userService.GetUser("test@test.ca")).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_ask_the_service_to_log_the_user_in = () => 
-        {
-            A.CallTo(() => loginService.LoginUser(user, true)).MustHaveHappened(Repeated.Exactly.Once);
-        };
+        It should_ask_the_service_to_log_the_user_in = () => A.CallTo(() => loginService.LoginUser(user, true)).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_redirect_to_the_dashboard_view = () => { result.ShouldBeARedirectToRoute(); };
+        It should_redirect_to_the_dashboard_view = () => result.ShouldBeARedirectToRoute();
     }
 
     [Subject(typeof(SessionController))]
@@ -146,9 +137,9 @@ namespace Specs.nKanban.ControllerSpecs.Session
             result = controller.Delete();
         };
 
-        It should_ask_the_login_service_to_logoff = () => { A.CallTo(() => loginService.Logoff()).MustHaveHappened(Repeated.Exactly.Once); };
+        It should_ask_the_login_service_to_logoff = () => A.CallTo(() => loginService.Logoff()).MustHaveHappened(Repeated.Exactly.Once);
 
-        It should_have_a_message_in_tempdata = () => { controller.TempData.ShouldNotBeEmpty(); };
+        It should_have_a_message_in_tempdata = () => controller.TempData.ShouldNotBeEmpty();
 
         It should_redirect_to_home = () => {
             var redirectResult = result as RedirectToRouteResult;

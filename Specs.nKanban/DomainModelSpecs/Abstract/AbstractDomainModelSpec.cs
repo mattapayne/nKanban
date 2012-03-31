@@ -20,7 +20,7 @@ namespace Specs.nKanban.DomainModelSpecs.Abstract
     [Subject(typeof(AbstractDomainObject))]
     public class when_new : context_for_model
     {
-        It should_know_it_is_new = () => { obj.IsNew.ShouldBeTrue(); };
+        It should_know_it_is_new = () => obj.IsNew.ShouldBeTrue();
     }
 
     [Subject(typeof(AbstractDomainObject))]
@@ -28,6 +28,6 @@ namespace Specs.nKanban.DomainModelSpecs.Abstract
     {
         Because of = () => { obj.Id = Guid.NewGuid(); };
 
-        It should_know_it_is_not_new = () => { obj.IsNew.ShouldBeFalse(); };
+        It should_know_it_is_not_new = () => obj.IsNew.ShouldBeFalse();
     }
 }

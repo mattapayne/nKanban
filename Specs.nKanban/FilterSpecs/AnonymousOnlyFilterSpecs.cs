@@ -43,21 +43,21 @@ namespace Specs.nKanban.FilterSpecs
     [Subject(typeof(AnonymousOnlyFilterAttribute))]
     public class when_invoked_with_anonymous_user : context_for_filter
     {
-        Establish contextAnon = () => { A.CallTo(() => mockRequest.IsAuthenticated).Returns(false); };
+        Establish contextAnon = () => A.CallTo(() => mockRequest.IsAuthenticated).Returns(false);
 
-        Because of = () => { filter.OnActionExecuting(ctx); };
+        Because of = () => filter.OnActionExecuting(ctx);
 
-        It should_not_redirect = () => { ctx.Result.ShouldBeNull(); };
+        It should_not_redirect = () => ctx.Result.ShouldBeNull();
     }
 
     [Subject(typeof(AnonymousOnlyFilterAttribute))]
     public class when_invoked_with_authenticated_user : context_for_filter
     {
-        Establish contextAnon = () => { A.CallTo(() => mockRequest.IsAuthenticated).Returns(true); };
+        Establish contextAnon = () => A.CallTo(() => mockRequest.IsAuthenticated).Returns(true);
 
-        Because of = () => { filter.OnActionExecuting(ctx); };
+        Because of = () => filter.OnActionExecuting(ctx);
 
-        It should_redirect = () => { ctx.Result.ShouldBeOfType(typeof(RedirectToRouteResult)); };
+        It should_redirect = () => ctx.Result.ShouldBeOfType(typeof(RedirectToRouteResult));
 
         It should_by_default_redirect_to_dashboard = () => {
             var result = ctx.Result as RedirectToRouteResult;
@@ -76,9 +76,9 @@ namespace Specs.nKanban.FilterSpecs
             A.CallTo(() => mockRequest.IsAuthenticated).Returns(true); 
         };
 
-        Because of = () => { filter.OnActionExecuting(ctx); };
+        Because of = () => filter.OnActionExecuting(ctx);
 
-        It should_redirect = () => { ctx.Result.ShouldBeOfType(typeof(RedirectToRouteResult)); };
+        It should_redirect = () => ctx.Result.ShouldBeOfType(typeof(RedirectToRouteResult));
 
         It should_by_default_redirect_to_dashboard = () =>
         {
