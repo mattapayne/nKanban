@@ -1,0 +1,25 @@
+﻿@model nKanban.Models.CreateKanbanBoardViewModel
+@{
+    ViewBag.Title = "nKanban :: Create New Kanban Board";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+}
+<h2>
+    Create a New Kanban Board</h2>
+@using (Html.BeginForm("Create", "KanbanBoard", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary("There were some errors ...", new { id = "validation-errors" })
+
+    <fieldset>
+        <legend>Please fill in the required information below</legend>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(m => m.Name, new { @class = "input-xlarge" })
+                @Html.ValidationMessageFor(m => m.Name, "!", new { @class = "help-inline field-error" })
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </div>
+    </fieldset>
+}

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using nKanban.Domain;
 using nKanban.Persistence;
 using System.Security.Cryptography;
 using System.Web.Security;
-using System.Web;
-using System.Web.Script.Serialization;
 
 namespace nKanban.Services.Impl
 {
@@ -32,6 +29,7 @@ namespace nKanban.Services.Impl
             if (user == null)
             {
                 errors.Add(new ServiceError(String.Empty, "User cannot be null."));
+                return errors;
             }
 
             if (String.IsNullOrEmpty(password))
@@ -39,7 +37,7 @@ namespace nKanban.Services.Impl
                 errors.Add(new ServiceError("Password", "Password cannot be empty."));
             }
 
-            if (user != null && !IsEmailAddressUnique(user.Email))
+            if (!IsEmailAddressUnique(user.Email))
             {
                 errors.Add(new ServiceError("Email", "Sorry, that username is taken."));
             }
@@ -116,7 +114,7 @@ namespace nKanban.Services.Impl
         private string GenerateSalt()
         {
             var rng = new RNGCryptoServiceProvider();
-            byte[] buff = new byte[20];
+            var buff = new byte[20];
             rng.GetBytes(buff);
             return Convert.ToBase64String(buff);
         }

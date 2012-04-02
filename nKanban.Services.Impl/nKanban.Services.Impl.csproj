@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractBaseService.cs" />
+    <Compile Include="KanbanBoardService.cs" />
     <Compile Include="LoginService.cs" />
     <Compile Include="SimpleService.cs" />
     <Compile Include="UserService.cs" />

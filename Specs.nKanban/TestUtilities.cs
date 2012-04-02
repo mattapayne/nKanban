@@ -28,7 +28,7 @@ namespace Specs.nKanban
             return String.Empty;
         }
 
-        public static void StubLoggedInStatus(Controller controller, nKanbanPrincipal user, bool loggedin = true)
+        public static void StubLoggedInStatus(Controller controller, NKanbanPrincipal user, bool loggedin = true)
         {
             //stub out HttpContext.Request.IsAuthenticated and HttpContext.Request.User
             var stubContext = A.Fake<HttpContextBase>();
@@ -49,6 +49,11 @@ namespace Specs.nKanban
         public static IEnumerable<Province> GetProvinces()
         {
             return new List<Province>() { new Province() { Id = Guid.NewGuid(), Name = "BC" }, new Province() { Id = Guid.NewGuid(), Name = "ON" } };
+        }
+
+        public static IEnumerable<KanbanBoard> GetKanbanBoards()
+        {
+            return new List<KanbanBoard>() { new KanbanBoard() { Id = Guid.NewGuid() }, new KanbanBoard() { Id = Guid.NewGuid() } };
         }
     }
 }

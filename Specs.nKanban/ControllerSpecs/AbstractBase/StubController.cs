@@ -21,7 +21,7 @@ namespace Specs.nKanban.ControllerSpecs.AbstractBase
             this.SetRedirectMessage(messageType, message);
         }
 
-        public nKanbanPrincipal CurrentUserPub
+        public NKanbanPrincipal CurrentUserPub
         {
             get
             {

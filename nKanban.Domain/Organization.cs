@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace nKanban.Domain
+﻿namespace nKanban.Domain
 {
     public class Organization : AbstractDomainObject
     {

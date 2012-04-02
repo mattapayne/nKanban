@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using nKanban.Persistence;
 using System.Linq.Expressions;
 using nKanban.Domain;
 using MongoDB.Driver;

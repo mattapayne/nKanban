@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormsIdentityWrapper.cs" />
+    <Compile Include="IFormsIdentity.cs" />
     <Compile Include="IHttpContext.cs" />
-    <Compile Include="nKanbanIdentity.cs" />
-    <Compile Include="nKanbanPrincipal.cs" />
+    <Compile Include="NKanbanIdentity.cs" />
+    <Compile Include="NKanbanPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

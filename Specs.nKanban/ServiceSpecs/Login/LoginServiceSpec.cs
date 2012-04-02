@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Machine.Specifications;
-using nKanban.Services.Impl;
-using FakeItEasy;
-using nKanban.Persistence;
 using nKanban.Domain;
-using System.Linq.Expressions;
-using nKanban.Services;
-using System.Web;
-using nKanban.Shared;
+using nKanban.Services.Impl;
 
 
 namespace Specs.nKanban.ServiceSpecs.LoginSvc

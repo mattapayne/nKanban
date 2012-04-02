@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using AutoMapper;
 using nKanban.Models;
 using nKanban.Domain;
@@ -64,18 +61,17 @@ namespace nKanban.Infrastructure
 
             if (!BsonClassMap.IsClassMapRegistered(typeof(User)))
             {
-                BsonClassMap.RegisterClassMap<User>(cm =>
-                {
-                    cm.AutoMap();
-                });
+                BsonClassMap.RegisterClassMap<User>(cm => cm.AutoMap());
             }
 
             if (!BsonClassMap.IsClassMapRegistered(typeof(Organization)))
             {
-                BsonClassMap.RegisterClassMap<Organization>(cm => 
-                {
-                    cm.AutoMap();
-                });
+                BsonClassMap.RegisterClassMap<Organization>(cm => cm.AutoMap());
+            }
+
+            if (!BsonClassMap.IsClassMapRegistered(typeof(KanbanBoard)))
+            {
+                BsonClassMap.RegisterClassMap<KanbanBoard>(cm => cm.AutoMap());
             }
         }
 
@@ -86,6 +82,12 @@ namespace nKanban.Infrastructure
 
             //RegisterViewModel -> Organization
             Mapper.CreateMap<RegisterViewModel, Organization>().ForMember(o => o.Name, opt => opt.MapFrom(v => v.OrganizationName));
+
+            //KanbanBoard -> KanbanBoardViewModel
+            Mapper.CreateMap<KanbanBoard, KanbanBoardViewModel>();
+
+            //CreateKanbanBoardViewModel -> KanbanBoard
+            Mapper.CreateMap<CreateKanbanBoardViewModel, KanbanBoard>();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using nKanban.Services;
@@ -38,13 +37,13 @@ namespace nKanban.Controllers
             ((List<string>)TempData[messageType.ToString()]).Add(message);
         }
 
-        protected nKanbanPrincipal CurrentUser
+        protected NKanbanPrincipal CurrentUser
         {
             get
             {
                 if (HttpContext.Request.IsAuthenticated)
                 {
-                    return HttpContext.User as nKanbanPrincipal;
+                    return HttpContext.User as NKanbanPrincipal;
                 }
 
                 return null;

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Security.Principal;
-using System.Web.Security;
 using System.Web.Script.Serialization;
 
 namespace nKanban.Shared
 {
-    public class nKanbanIdentity : IIdentity
+    public class NKanbanIdentity : IIdentity
     {
-        private Guid _id;
         private readonly bool _authenticated;
-        private JavaScriptSerializer _serializer;
+        private readonly JavaScriptSerializer _serializer;
 
         private class IdentityData
         {
@@ -26,45 +23,41 @@ namespace nKanban.Shared
             }
         }
 
-        public nKanbanIdentity(Guid? id, string name, string email, IEnumerable<string> roles)
+        public NKanbanIdentity(Guid? id, string name, string email, IEnumerable<string> roles)
         {
+            this._authenticated = false;
+
             if (id.HasValue)
             {
                 this._authenticated = true;
-                this._id = id.Value;
+                this.Id = id.Value;
             }
 
             this.Name = name;
             this.Email = email;
-            this.Roles = roles == null ? Enumerable.Empty<string>().ToList() : roles.ToList();
+            this.Roles = roles != null ? roles.ToList() : Enumerable.Empty<string>().ToList();
         }
 
-        public nKanbanIdentity(IIdentity identity)
+        public NKanbanIdentity(IFormsIdentity identity)
         {
-            if (identity is FormsIdentity)
+            _serializer = new JavaScriptSerializer();
+            this._authenticated = false;
+
+            Guid id;
+
+            if (Guid.TryParse(identity.Name, out id))
             {
-                _serializer = new JavaScriptSerializer();
+                this.Id = id;
+                this._authenticated = true;
 
-                FormsIdentity i = identity as FormsIdentity;
-                Guid id;
+                var ident = _serializer.Deserialize(identity.Ticket.UserData, typeof (IdentityData)) as IdentityData;
 
-                if (Guid.TryParse(identity.Name, out id))
+                if (ident != null)
                 {
-                    this._id = id;
-                    var ident = _serializer.Deserialize(i.Ticket.UserData, typeof(IdentityData)) as IdentityData;
                     this.Name = ident.Name;
                     this.Roles = ident.Roles;
                     this.Email = ident.Email;
-                    this._authenticated = true;
                 }
-                else
-                {
-                    this._authenticated = false;
-                }
-            }
-            else
-            {
-                this._authenticated = false;
             }
         }
 
@@ -84,14 +77,11 @@ namespace nKanban.Shared
 
         private List<string> Roles { get; set; }
 
-        public Guid Id
-        {
-            get { return _id; }
-        }
+        public Guid Id { get; private set; }
 
         public bool IsInRole(string role)
         {
-            return Roles == null ? false : Roles.Any(r => r == role);
+            return Roles != null && Roles.Any(r => r == role);
         }
     }
 }

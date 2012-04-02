@@ -63,12 +63,12 @@ namespace Specs.nKanban.ControllerSpecs.AbstractBase
     [Subject(typeof(AbstractBaseController))]
     public class getting_current_user_when_authenticated : context_for_controller
     {
-        static nKanbanPrincipal user;
+        static NKanbanPrincipal user;
         static bool loggedin;
 
         Establish ctx = () => 
         {
-            user = new nKanbanPrincipal(new nKanbanIdentity(Guid.NewGuid(), "Test User", "test@test.ca", null));
+            user = new NKanbanPrincipal(new NKanbanIdentity(Guid.NewGuid(), "Test User", "test@test.ca", null));
             TestUtilities.StubLoggedInStatus(controller, user, true);
         };
 
@@ -88,7 +88,7 @@ namespace Specs.nKanban.ControllerSpecs.AbstractBase
     [Subject(typeof(AbstractBaseController))]
     public class getting_current_user_when_not_authenticated : context_for_controller
     {
-        static nKanbanPrincipal user;
+        static NKanbanPrincipal user;
         static bool loggedin;
 
         Establish ctx = () => TestUtilities.StubLoggedInStatus(controller, null, false);

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -54,7 +52,7 @@ namespace nKanban
                 return;
             }
 
-            var customPrincipal = new nKanbanPrincipal(new nKanbanIdentity(HttpContext.Current.User.Identity));
+            var customPrincipal = new NKanbanPrincipal(new NKanbanIdentity(new FormsIdentityWrapper(HttpContext.Current.User.Identity)));
             HttpContext.Current.User = customPrincipal;
             Thread.CurrentPrincipal = customPrincipal;
         }

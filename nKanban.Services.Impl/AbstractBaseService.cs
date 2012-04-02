@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using nKanban.Persistence;
 
 namespace nKanban.Services.Impl
@@ -10,7 +7,7 @@ namespace nKanban.Services.Impl
     {
         private readonly IRepository _repository;
 
-        public AbstractBaseService(IRepository repository)
+        protected AbstractBaseService(IRepository repository)
         {
             if (repository == null)
             {

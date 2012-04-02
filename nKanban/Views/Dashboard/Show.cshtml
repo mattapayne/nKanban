@@ -1,6 +1,22 @@
-﻿@{
+﻿@model nKanban.Models.DashboardViewModel
+@{
     ViewBag.Title = "nKanban :: Dashboard";
     Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
 }
-
-<h2>Index</h2>
+<h2>
+    Welome to your dashboard</h2>
+<div>
+    <h3>
+        Your Kanban boards:</h3>
+    @if(Model.KanbanBoards.Any())
+    {
+        foreach(var board in Model.KanbanBoards)
+        {
+            Html.RenderPartial("_KanbanBoard", board);
+        }
+    }
+    else
+    {
+            Html.RenderPartial("_NoKanbanBoards");
+    }
+</div>

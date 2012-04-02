@@ -166,6 +166,80 @@ namespace Specs.nKanban.ServiceSpecs.UserSvc
     }
 
     [Subject(typeof(UserService))]
+    public class when_creating_user_with_existing_organization : context_for_service
+    {
+        static IEnumerable<ServiceError> errors;
+
+        Establish ctx = () =>
+        {
+            A.CallTo(() => repo.Query<User>(A<Expression<Func<User, bool>>[]>.Ignored)).Returns(new User[0]);
+
+            //checking for organization returns an organization
+            A.CallTo(() => repo.Query<Organization>(A<Expression<Func<Organization, bool>>[]>.Ignored)).Returns(new Organization[] { new Organization() });
+        };
+
+        Because of = () => { errors = service.CreateUser(new User() { Email = "test@test.ca" }, "password", new Organization() { Name = "Test Org"}); };
+
+        It should_check_if_the_organization_exists = () => A.CallTo(() => repo.Query<Organization>(A<Expression<Func<Organization, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+
+        It should_not_create_the_user = () => A.CallTo(() => repo.Insert<User>(A<User>.Ignored)).MustNotHaveHappened();
+
+        It should_have_errors = () => errors.ShouldNotBeEmpty();
+    }
+
+    [Subject(typeof(UserService))]
+    public class when_creating_user_with_new_organization : context_for_service
+    {
+        static IEnumerable<ServiceError> errors;
+
+        Establish ctx = () =>
+        {
+            A.CallTo(() => repo.Query<User>(A<Expression<Func<User, bool>>[]>.Ignored)).Returns(new User[0]);
+
+            //checking for organization returns no organizations
+            A.CallTo(() => repo.Query<Organization>(A<Expression<Func<Organization, bool>>[]>.Ignored)).Returns(new Organization[0]);
+
+            A.CallTo(() => repo.Insert<Organization>(A<Organization>.Ignored)).Returns(true);
+        };
+
+        Because of = () => { errors = service.CreateUser(new User() { Email = "test@test.ca" }, "password", new Organization() { Name = "Test Org" }); };
+
+        It should_check_if_the_organization_exists = () => A.CallTo(() => repo.Query<Organization>(A<Expression<Func<Organization, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+
+        It should_create_the_organization = () => A.CallTo(() => repo.Insert<Organization>(A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+
+        It should_create_the_user = () => A.CallTo(() => repo.Insert<User>(A<User>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+
+        It should_not_have_errors = () => errors.ShouldBeEmpty();
+    }
+
+    [Subject(typeof(UserService))]
+    public class when_creating_user_with_new_organization_but_organization_insert_fails : context_for_service
+    {
+        static IEnumerable<ServiceError> errors;
+
+        Establish ctx = () =>
+        {
+            A.CallTo(() => repo.Query<User>(A<Expression<Func<User, bool>>[]>.Ignored)).Returns(new User[0]);
+
+            //checking for organization returns no organizations
+            A.CallTo(() => repo.Query<Organization>(A<Expression<Func<Organization, bool>>[]>.Ignored)).Returns(new Organization[0]);
+
+            A.CallTo(() => repo.Insert<Organization>(A<Organization>.Ignored)).Returns(false);
+        };
+
+        Because of = () => { errors = service.CreateUser(new User() { Email = "test@test.ca" }, "password", new Organization() { Name = "Test Org" }); };
+
+        It should_check_if_the_organization_exists = () => A.CallTo(() => repo.Query<Organization>(A<Expression<Func<Organization, bool>>[]>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+
+        It should_create_the_organization = () => A.CallTo(() => repo.Insert<Organization>(A<Organization>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+
+        It should_not_create_the_user = () => A.CallTo(() => repo.Insert<User>(A<User>.Ignored)).MustNotHaveHappened();
+
+        It should_have_errors = () => errors.ShouldNotBeEmpty();
+    }
+
+    [Subject(typeof(UserService))]
     public class when_getting_user_by_username_and_username_is_blank : context_for_service
     {
         static User user;

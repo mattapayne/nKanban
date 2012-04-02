@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security.Principal;
 
 namespace nKanban.Shared
 {
-    public class nKanbanPrincipal : IPrincipal
+    public class NKanbanPrincipal : IPrincipal
     {
-        private readonly nKanbanIdentity _identity;
+        private readonly NKanbanIdentity _identity;
 
-        public nKanbanPrincipal(nKanbanIdentity identity)
+        public NKanbanPrincipal(NKanbanIdentity identity)
         {
             if (identity == null)
             {
